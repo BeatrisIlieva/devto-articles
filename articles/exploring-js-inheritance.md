@@ -9,6 +9,7 @@ published: true
 1. [Introduction](#introduction)
 2. [Object Prototypes](#object-prototypes)
 3. [Function Prototype Property](#function-prototype-property)
+4. [New Keyword](#new-keyword)
 
 ## Introduction
 
@@ -202,15 +203,15 @@ firstCat.meow(); // Daisy says meow
 secondCat.meow(); // Tom says meow
 ```
 
-Now, both cats will use the same `meow` method. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
+#### What's improved
+
+Both cats will use the same `meow` method -> only one reference is created in memory. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
 
 ## Function Prototype Property
 
 _Key terms:_
 
-**`.prototype`**: function prototype property
-
----
+## **`.prototype`**: function prototype property
 
 > **Note:** Functions do NOT have prototypes. Functions have prototype property. Objects have prototypes.
 
@@ -245,8 +246,45 @@ In this case, we have created two separate `study` functions in memory.
 console.log(firstPerson.study === secondPerson.study); // false
 ```
 
-Can we fix that? As we already know a function has a prototype property.
+As we already know a function has a prototype property.
 
 ```javascript
 console.log(Person.prototype); // {constructor: ƒ}
 ```
+
+Now let's refactor the code to improve memory efficiency:
+
+```javascript
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+Person.prototype.efficientStudy = function () {
+    console.log(
+        `${this.firstName} ${this.lastName} is efficiently studying.`
+    );
+};
+
+const firstPerson = new Person('John', 'Doe');
+const secondPerson = new Person('Brian', 'Smith');
+
+firstPerson.efficientStudy(); // John Doe is efficiently studying.
+secondPerson.efficientStudy(); // Brian Smith is efficiently studying.
+
+console.log(
+    firstPerson.efficientStudy === secondPerson.efficientStudy
+); // true
+```
+
+#### What's improved
+
+The `prototype property of a function` holds an object, and this object is assigned as the prototype to all objects created using that function as a constructor.
+
+Now, instead of each object instance having its own efficientStudy method, we have a single method created on the prototype. This allows all instances of Person to inherit the method, saving memory.
+
+By setting the method on Person.prototype, every object created from the Person constructor automatically inherits the method, so there’s only one copy of it in memory.
+
+## New Keyword
+
+Does the `function constructor` remind you of a `class`? It’s no coincidence. In JavaScript, behind the scenes, classes are essentially syntactic sugar for function constructors — functions that create objects and assign prototypes to them
