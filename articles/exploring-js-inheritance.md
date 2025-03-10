@@ -285,6 +285,61 @@ Now, instead of each object instance having its own efficientStudy method, we ha
 
 By setting the method on Person.prototype, every object created from the Person constructor automatically inherits the method, so there’s only one copy of it in memory.
 
-## New Keyword
+## The New Keyword
 
-Does the `function constructor` remind you of a `class`? It’s no coincidence. In JavaScript, behind the scenes, classes are essentially syntactic sugar for function constructors — functions that create objects and assign prototypes to them
+Does the `function constructor` remind you of a `class`? It’s no coincidence. In JavaScript, behind the scenes, classes are essentially syntactic sugar for function constructors — functions that create objects and assign prototypes to them.
+
+But how is the context of the `this` keyword set correctly? Let’s analyze it again:
+
+```javascript
+const firstPerson = new Person('John', 'Doe');
+```
+
+Didn’t we say that the context of `this` depends on how a function is invoked? In this case, we are calling it using the `new` keyword.
+
+Let's break down what the `new` keyword actually does by mimicking its behavior with a custom function, `newOperator`.
+
+```javascript
+// Define a function constructor
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+// Set a prototype to the constructor
+Person.prototype.efficientStudy = function () {
+    console.log(
+        `${this.firstName} ${this.lastName} is efficiently studying.`
+    );
+};
+
+// Define the newOperator function
+function newOperator(constructor, ...args) {
+    // Create new object
+    const newObj = {};
+
+    // Set the prototype of newObj to match the constructor’s prototype
+    Object.setPrototypeOf(newObj, constructor.prototype);
+
+    // Call the constructor function with newObj as its context
+    constructor.apply(newObj, args);
+
+    // Return the new object
+    return newObj;
+}
+// Use newOperator to create an instance of Person
+const person = newOperator(Person, 'Michel', 'Smit');
+console.log(person); // Person {firstName: 'Michel', lastName: 'Smit'}
+person.efficientStudy(); // Michel Smit is efficiently studying.
+```
+
+#### What Does the new Keyword Do
+
+The `newOperator` function replicates the behavior of the `new` keyword. Here’s what it does step by step:
+
+1. **Creates a new object** that will be the instance.
+2. **Sets its prototype** by linking it to the constructor function’s `prototype` property.
+3. **Calls the constructor function** with the newly created object as its `this` context.
+4. **Returns the new object**, effectively creating an instance.
+
+By using the new keyword, JavaScript automates this process, making object creation with constructors easier and more intuitive.
