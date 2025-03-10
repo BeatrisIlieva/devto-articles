@@ -126,6 +126,20 @@ console.log(grandMather.hasOwnProperty('pencil')); // false
 console.log(daughter.hasOwnProperty('notebook')); // false
 ```
 
+### Iterating all members
+
+Using the `for...in` loop we can get all object's properties and methods including the inherited ones.
+
+```javascript
+for (const key in grandDaughter) {
+    console.log(key);
+}
+// pencil
+// notebook
+// solveAlgebraProblems
+// writeGeometryProof
+```
+
 ## Function Prototype Property
 
 _Key terms:_
