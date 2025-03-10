@@ -10,7 +10,7 @@ published: true
 2. [Object Prototypes](#object-prototypes)
 3. [Function Prototype Property](#function-prototype-property)
 4. [New Keyword](#new-keyword)
-5. [Prototype Inheritance](#prototype-inheritence)
+5. [Prototype Inheritance](#prototype-inheritance)
 
 ## Introduction
 
@@ -402,46 +402,69 @@ By using the new keyword, JavaScript automates this process, making object creat
 
 ## Prototype Inheritance
 
+In JavaScript, we can establish prototype-based inheritance by setting up a chain of prototypes between constructor functions. Let's explore how inheritance works by creating an Animal constructor and then inheriting from it in a Cat constructor.
+
 ```javascript
-// Base function constructor of the Cat
+// Base function constructor for Animal
 function Animal(species, speciesDiet) {
-    // this here is the this that is passed by the method call() from the Cat constructor
+    // `this` refers to the object that will be created
     this.species = species;
     this.speciesDiet = speciesDiet;
 }
 
+// Add a method to Animal's prototype
 Animal.prototype.eat = function () {
     console.log(`${this.species} is a ${this.speciesDiet}.`);
 };
 
+// Constructor function for Cat
 function Cat(name, breed) {
     this.name = name;
     this.breed = breed;
 
-    // we pass as a context to the Animal function constructor as context the current this
+    // Call the Animal constructor, binding `this` to the new Cat instance
     Animal.call(this, 'Cat', 'Carnivore');
 }
 
-// we create a new object and assign it as a prototype the prototype of the Animal constructor
+// Create an empty object and set its prototype to Animal's prototype
 const catPrototype = {};
 Object.setPrototypeOf(catPrototype, Animal.prototype);
+
+// Assign the new prototype to Cat
 Cat.prototype = catPrototype;
+
+// Alternatively, we could use:
 // Cat.prototype = Object.create(Animal.prototype);
 
+// Add a method specific to Cat
 Cat.prototype.meow = function () {
     console.log(`${this.name} says meow.`);
 };
 
+// Create an instance of Cat
 const daisyCat = new Cat('Daisy', 'Angora');
-// own properties
+
+// Daisy has its own properties
 console.log(daisyCat); // Cat {name: 'Daisy', breed: 'Angora', species: 'cat', speciesDiet: 'carnivore'}
-// coming from Cat prototype
+
+// Method from Cat's prototype
 daisyCat.meow(); // Daisy says meow.
-// coming from Animal prototype
+
+// Method from Animal's prototype
 daisyCat.eat(); // Cat is a Carnivore.
 ```
 
-As we can see first can has it's own properties not only name and breed but also species and speciesDiet. How is this possible? When we invoke the the Animal constructor in the Cat constructor se bind the this keyword to the cat object. So in both constructors this refers to the newly created cat object. Thus, both constructors decorated the newly created object. The prototype of the cat is the object we create and set. And the prototype of the prototype is the Animal prototype. The method meow comes from the cat prototype and the method eat comes from the animal prototype
+### How It Works
+
+1. The Cat constructor defines its own properties (name and breed).
+2. It then calls Animal.call(this, 'Cat', 'Carnivore'), which executes the Animal constructor, assigning the properties species and speciesDiet to this (the new Cat instance).
+3. We manually set up the prototype chain:
+    1. Cat.prototype is assigned a new object that inherits from Animal.prototype.
+    2. This ensures that instances of Cat can access methods from Animal.prototype.
+4. The meow method is added to Cat.prototype, making it specific to Cat instances.
+5. Now, daisyCat has access to both meow() (from Cat.prototype) and eat() (from Animal.prototype), demonstrating prototype-based inheritance.
+
+This approach follows the principles of prototype inheritance in JavaScript, allowing us to reuse functionality while keeping memory usage efficient.
 
 ## Summary
 
