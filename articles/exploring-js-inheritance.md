@@ -24,7 +24,7 @@ From this, we can confidently embrace the nearly philosophical notion that, in O
 
 ## Object Prototypes
 
-#### Key terms
+### Key terms
 
 1. **`__proto__`**: a property of objects that points to the prototype reference
 2. **`Object.setPrototypeOf()`**: method that we use to set a prototype of an object
@@ -128,7 +128,7 @@ console.log(daughter.hasOwnProperty('notebook')); // false
 
 ## Function Prototype Property
 
-#### Key terms
+### Key terms
 
 **`.prototype`**: function prototype property
 
