@@ -29,5 +29,6 @@ From this, we can confidently embrace the nearly philosophical notion that, in O
 > **Note:** The prototype chain and OOP inheritance are one-way relationships -> prototypes and parent classes do not have access to the members of their descendants.
 
 ## Prototype
+A prototype is a reference to another object, and it doesn't consume additional memory. Objects are linked by reference, making it memory efficient.
 
 Let's build a prototype chain using the devices _scanner_, _printer_, _copier_, and _fax machine_.
