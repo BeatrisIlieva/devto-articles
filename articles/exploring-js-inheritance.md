@@ -150,6 +150,60 @@ Only the own members are included in the JSON string
 console.log(JSON.stringify(grandDaughter)); // {"pencil":true,"notebook":true}
 ```
 
+#### 'Object.keys()`
+
+Only the own members are included in the array
+
+```javascript
+console.log(Object.keys(grandDaughter)); // ['pencil', 'notebook']
+```
+
+### What Benefits Do Prototypes Bring Us
+
+```javascript
+const firstCat = {
+    name: 'Daisy',
+    meow() {
+        console.log(`${this.name} says meow`);
+    }
+};
+
+const secondCat = {
+    name: 'Tom',
+    meow() {
+        console.log(`${this.name} says meow`);
+    }
+};
+```
+
+We have just violated the DRY principle. Additionally, we have created two identical methods in memory, which is counterproductive.
+
+The solution is to create a base cat object to be inherited by the other cats through the prototype object. This way, we can eliminate the repetition.
+
+```javascript
+const firstCat = {
+    name: 'Daisy'
+};
+
+const secondCat = {
+    name: 'Tom'
+};
+
+const cat = {
+    meow() {
+        console.log(`${this.name} says meow`);
+    }
+};
+
+Object.setPrototypeOf(firstCat, cat);
+Object.setPrototypeOf(secondCat, cat);
+
+firstCat.meow(); // Daisy says meow
+secondCat.meow(); // Tom says meow
+```
+
+Now, both cats will use the same `meow` method. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
+
 ## Function Prototype Property
 
 _Key terms:_
@@ -159,3 +213,11 @@ _Key terms:_
 ---
 
 > **Note:** Functions do NOT have prototypes. Functions have prototype property. Objects have prototypes.
+
+Each function has a `prototype property`, which refers to an object, just like an object's prototype refers to another object.
+
+### Function constructor
+
+In JS `function constructor` is a special type function that allows us to create objects. However, it neither a factory function nor a class.
+
+> **Note:** A function constructor's name is written in `PascalCase`. When we see a name written in PascalCase, we know that it should be invoked using the `new` keyword.
