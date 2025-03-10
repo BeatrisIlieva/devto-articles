@@ -11,8 +11,8 @@ published: true
 
 ## 📋 Table of Contents
 
--   [Introduction](#introduction)
--   [Prototype](#prototype)
+- [Introduction](#introduction)
+- [Prototype](#prototype)
 
 ## Introduction
 
