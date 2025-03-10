@@ -8,7 +8,7 @@ tags:
         'Classes',
         'Beginners'
     ]
-published: false
+published: true
 ---
 
 ## 📋 Table of Contents
@@ -25,6 +25,8 @@ Inheritance is key feature of OOP (Object-oriented programming). OOP is at the h
 Imagine you are at work and you have forgotten your charger. You ask a colleague to borrow theirs. In this case, you do not have your own charger, but you use one as if it was your own. Does that mean that the charger get's copied? No, there is only one charger - the one of your colleague (your prototype). After your device is charged, you return the charger.
 
 From this, we can confidently embrace the nearly philosophical notion that, in OOP inheritance, the relationship is defined by what an object **IS**, whereas in prototypal inheritance, the relationship is defined by what an object **HAS**.
+
+> **Note:** The prototype chain is a one-way direction -> prototypes do not have access to the members of their descendants.
 
 ## Prototype
 
