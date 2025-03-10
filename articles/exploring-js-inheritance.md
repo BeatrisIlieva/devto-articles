@@ -221,3 +221,32 @@ Each function has a `prototype property`, which refers to an object, just like a
 In JS `function constructor` is a special type function that allows us to create objects. However, it neither a factory function nor a class.
 
 > **Note:** A function constructor's name is written in `PascalCase`. When we see a name written in PascalCase, we know that it should be invoked using the `new` keyword.
+
+Let's examine what happens in memory when we create two object instances using a `function constructor`.
+
+```javascript
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.study = function () {
+        console.log(
+            `${this.firstName} ${this.lastName} is studying.`
+        );
+    };
+}
+
+const firstPerson = new Person('John', 'Doe');
+const secondPerson = new Person('Brian', 'Smith');
+```
+
+In this case, we have created two separate `study` functions in memory.
+
+```javascript
+console.log(firstPerson.study === secondPerson.study); // false
+```
+
+Can we fix that? As we already know a function has a prototype property.
+
+```javascript
+console.log(Person.prototype); // {constructor: ƒ}
+```
