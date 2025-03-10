@@ -6,14 +6,14 @@ published: true
 
 ## 📋 Table of Contents
 
--   [📚 Introduction](#introduction)
--   [What is a Property ❓](#what-is-a-property)
--   [🔍 Properties of Properties](#properties-of-properties)
--   [How to Create a Fully Configured Object ❓](#how-to-create-a-fully-configured-object)
--   [How to Define Getters and Setters for Object Properties ❓](#how-to-define-getters-and-setters-for-object-properties)
--   [🔒 Object Freeze Method](#object-freeze-method)
--   [🔐 Object Seal Method](#object-seal-method)
--   [🔑 Summary](#summary)
+- [📚 Introduction](#introduction)
+- [What is a Property ❓](#what-is-a-property)
+- [🔍 Properties of Properties](#properties-of-properties)
+- [How to Create a Fully Configured Object ❓](#how-to-create-a-fully-configured-object)
+- [How to Define Getters and Setters for Object Properties ❓](#how-to-define-getters-and-setters-for-object-properties)
+- [🔒 Object Freeze Method](#object-freeze-method)
+- [🔐 Object Seal Method](#object-seal-method)
+- [🔑 Summary](#summary)
 
 ## <a id="introduction"></a> 📚 Introduction
 
