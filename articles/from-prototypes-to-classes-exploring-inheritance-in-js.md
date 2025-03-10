@@ -26,7 +26,7 @@ Imagine you are at work and you have forgotten your charger. You ask a colleague
 
 From this, we can confidently embrace the nearly philosophical notion that, in OOP inheritance, the relationship is defined by what an object **IS**, whereas in prototypal inheritance, the relationship is defined by what an object **HAS**.
 
-> **Note:** The prototype chain is a one-way direction -> prototypes do not have access to the members of their descendants.
+> **Note:** The prototype chain and OOP inheritance are one-way relationships -> prototypes and parent classes do not have access to the members of their descendants.
 
 ## Prototype
 
