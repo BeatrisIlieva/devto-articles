@@ -207,6 +207,28 @@ secondCat.meow(); // Tom says meow
 
 Both cats will use the same `meow` method -> only one reference is created in memory. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
 
+### `Object.assign()`
+
+The `Object.assign()` method assigns to a given object a copy of another object only its own members.
+
+```javascript
+const daisyCat = {
+    name: 'Daisy'
+};
+
+const cat = {
+    meow() {
+        console.log(`${this.name} says meow`);
+    }
+};
+
+const copyCat = Object.assign({}, daisyCat);
+console.log(copyCat); // {name: 'Daisy'}
+console.log(copyCat.meow); // undefined
+```
+
+### `Object.create()`
+
 ## Function Prototype Property
 
 _Key terms:_
@@ -342,4 +364,15 @@ The `newOperator` function replicates the behavior of the `new` keyword. Here’
 3. **Calls the constructor function** with the newly created object as its `this` context.
 4. **Returns the new object**, effectively creating an instance.
 
-By using the new keyword, JavaScript automates this process, making object creation with constructors easier and more intuitive.
+By using the new keyword, JavaScript automates this process, making object creation with constructors easier and more intuitive. In fact, this entire process mirrors how classes work behind the scenes.
+
+## Summary
+
+### In JS we have fours ways to create a new instance of an object:
+
+1. By using an object literal
+2. By using a factory function
+3. By using the class syntax
+4. By using a function constructor
+
+### What is an own member
