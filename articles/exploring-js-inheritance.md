@@ -209,7 +209,7 @@ Both cats will use the same `meow` method -> only one reference is created in me
 
 ### `Object.assign()`
 
-The `Object.assign()` method assigns to a given object a copy of another object only its own members.
+The `Object.assign()` method creates a shallow copy of an object's **own** properties (excluding inherited properties from the prototype chain) and assigns them to a target object.
 
 ```javascript
 const daisyCat = {
@@ -222,12 +222,45 @@ const cat = {
     }
 };
 
+Object.setPrototypeOf(daisyCat, cat);
+
 const copyCat = Object.assign({}, daisyCat);
 console.log(copyCat); // {name: 'Daisy'}
 console.log(copyCat.meow); // undefined
 ```
 
+Since `Object.assign()` only copies **own** properties, the `meow` method (which exists in the prototype) is not included in `copyCat`. This means `copyCat` does **not** inherit from `cat`.
+
 ### `Object.create()`
+
+The `Object.create() `method creates a new object with the specified object as its **prototype**. This means the new object does not get copies of the properties but instead **inherits** them.
+
+```javascript
+const daisyCat = {
+    name: 'Daisy'
+};
+
+const cat = {
+    meow() {
+        console.log(`${this.name} says meow`);
+    }
+};
+
+Object.setPrototypeOf(daisyCat, cat);
+
+const copyCat = Object.create(daisyCat);
+console.log(copyCat); // {}
+copyCat.meow(); // Daisy says meow
+```
+
+At first glance, `copyCat` appears empty. However, it **inherits** from daisyCat, which means it can still access the properties through the prototype chain.
+
+```javascript
+console.log(copyCat.__proto__); // {name: 'Daisy'}
+console.log(copyCat.__proto__.__proto__); // {meow: ƒ}
+```
+
+This approach is more memory-efficient because instead of duplicating properties, `copyCat` references them through prototypes.
 
 ## Function Prototype Property
 
@@ -376,3 +409,10 @@ By using the new keyword, JavaScript automates this process, making object creat
 4. By using a function constructor
 
 ### What is an own member
+
+### Difference between object create and object assign
+
+### Difference between `prototype property` and `proto`
+
+1. `proto` is a property of objects and refers to their prototypes.
+2. `prototype` is a property of functions that will be set as a prototype to the objects created by a given function constructor
