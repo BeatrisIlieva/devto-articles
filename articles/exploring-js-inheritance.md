@@ -1,13 +1,11 @@
 ---
 title: 'Exploring JavaScript Inheritance: Understanding Prototypes and Classes'
 tags:
-    [
-        'JavaScript',
-        'Prototypes',
-        'Inheritance',
-        'Classes',
-        'Beginners'
-    ]
+    - 'JavaScript'
+    - 'Prototypes'
+    - 'Inheritance'
+    - 'Classes'
+    - 'Beginners'
 published: true
 ---
 
