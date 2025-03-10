@@ -6,20 +6,20 @@ published: true
 
 ## 📋 Table of Contents
 
-- [📚 Introduction](#introduction)
-- [What is a Property ❓](#what-is-a-property)
-- [🔍 Properties of Properties](#properties-of-properties)
-- [How to Create a Fully Configured Object ❓](#how-to-create-a-fully-configured-object)
-- [How to Define Getters and Setters for Object Properties ❓](#how-to-define-getters-and-setters-for-object-properties)
-- [🔒 Object Freeze Method](#object-freeze-method)
-- [🔐 Object Seal Method](#object-seal-method)
-- [🔑 Summary](#summary)
+- [Introduction](#introduction)
+- [What is a Property](#what-is-a-property)
+- [Properties of Properties](#properties-of-properties)
+- [How to Create a Fully Configured Object](#how-to-create-a-fully-configured-object)
+- [How to Define Getters and Setters for Object Properties](#how-to-define-getters-and-setters-for-object-properties)
+- [Object Freeze Method](#object-freeze-method)
+- [Object Seal Method](#object-seal-method)
+- [Summary](#summary)
 
-## <a id="introduction"></a> 📚 Introduction
+## Introduction
 
 _In this article, we’ll explore how to configure objects in JavaScript (JS), giving us control over how properties behave, ensuring data integrity, and allowing us to customize the interaction with object values._
 
-## <a id="what-is-a-property"></a> What is a Property ❓
+## What is a Property
 
 ```javascript
 const person = {
@@ -29,17 +29,17 @@ const person = {
 };
 ```
 
-## <a id="properties-of-properties"></a> 🔍 Properties of Properties
+## Properties of Properties
 
 Every property has its own properties. We should not imagine them as a nested object but as a configuration.
 They are divided into four types:
 
-<p style="color: #0F52BA;">1. Value</p>
-<p style="color: #0F52BA;">2. Enumerable</p>
-<p style="color: #0F52BA;">3. Writable</p>
-<p style="color: #0F52BA;">4. Configurable</p>
+1. Value
+2. Enumerable
+3. Writable
+4. Configurable
 
-### 1️⃣ Value
+### Value
 
 We can set a property name and a **property value** using `Object.defineProperty()`
 
@@ -93,11 +93,11 @@ console.log(Object.keys(person)); // ['firstName']
 console.log(JSON.stringify(Object.keys(person))); // ["firstName"]
 ```
 
-### 2️⃣ Enumerable
+### Enumerable
 
 In JS we use the `for...in` loop to enumerate properties. Enumerable allows us to enable or disable whether a property is included in the enumeration. After using `Object.keys()`, only enumerable properties will appear in the resulting array.
 
-#### 🔑 Check if a property is enumerable
+#### Check if a property is enumerable
 
 ```javascript
 for (const propName in person) {
@@ -120,7 +120,7 @@ for (const propName in person) {
 }
 ```
 
-### 3️⃣ Writable
+### Writable
 
 The writable property allows us to define if a property can be assigned a new value. Thus, we can create a read-only property.
 
@@ -168,7 +168,7 @@ person.hobbies.push('cycling');
 console.log(person.hobbies); // ['playing the guitar', 'swimming', 'cycling']
 ```
 
-### 4️⃣ Configurable
+### Configurable
 
 By modifying the default attributes of a property, we are effectively configuring it. In practice, we can make a property non-configurable or revert it to configurable. Let’s examine the following example, where we have control over changing this setting later on.
 
@@ -308,7 +308,7 @@ delete person.dateOfBirth;
 console.log(person); // {firstName: 'John'};
 ```
 
-## <a id="how-to-create-a-fully-configured-object"></a> How to Create a Fully Configured Object ❓
+## How to Create a Fully Configured Object
 
 ```javascript
 const person = {};
@@ -352,7 +352,7 @@ console.log(propertyDescriptors);
 // }
 ```
 
-## <a id="how-to-define-getters-and-setters-for-object-properties"></a> How to Define Getters and Setters for Object Properties ❓
+## How to Define Getters and Setters for Object Properties
 
 ```javascript
 const person = {
@@ -378,7 +378,7 @@ person.balance = 2000;
 console.log(person.balance); // 2000
 ```
 
-## <a id="object-freeze-method"></a> 🔒 Object Freeze Method
+## Object Freeze Method
 
 Once an object is frozen, we can neither add new properties nor modify or delete existing ones. This is because both the `writable` and `configurable` attributes are automatically set to `false`.
 
@@ -413,7 +413,7 @@ console.log(Object.getOwnPropertyDescriptors(person));
 // }
 ```
 
-## <a id="object-seal-method"></a> 🔐 Object Seal Method
+## Object Seal Method
 
 ```javascript
 const person = {
@@ -448,9 +448,9 @@ console.log(Object.getOwnPropertyDescriptors(person));
 
 The difference between `Object.freeze()` and `Object.seal()` methods is that `Object.seal()` allows assigning new values to properties.
 
-## <a id="summary"></a> 🔑 Summary
+## Summary
 
-### <span style="color: #000080;">Properties of Properties</span>
+### Properties of Properties
 
 These are the internal properties that define the characteristics of an object property:
 
@@ -459,7 +459,7 @@ These are the internal properties that define the characteristics of an object p
 3. **Writable**: Indicates whether the value of the property can be modified.
 4. **Configurable**: Specifies whether the property can be deleted or its attributes can be modified.
 
-### <span style="color: #000080;">Property Configuration Methods</span>
+### Property Configuration Methods
 
 These methods allow us to define and manipulate properties on objects:
 
@@ -468,12 +468,12 @@ These methods allow us to define and manipulate properties on objects:
 3. **`Object.getOwnPropertyDescriptor()`**: Retrieves the descriptor for a specific property of an object.
 4. **`Object.getOwnPropertyDescriptors()`**: Returns all property descriptors of an object.
 
-### <span style="color: #000080;">Object.freeze() vs Object.seal(): Key Differences</span>
+### Object.freeze() vs Object.seal(): Key Differences
 
 Object.freeze() makes an object immutable by preventing any changes to its properties, including adding, modifying, or deleting them. In contrast, Object.seal() prevents new properties from being added and existing ones from being deleted, but allows modification of property values if they are writable (by default they are).
 
 <hr>
 
-#### 🙏 Thank you for reading!
+#### Thank you for reading!
 
-##### I would be grateful to understand your opinion. 💬
+##### I would be grateful to understand your opinion.
