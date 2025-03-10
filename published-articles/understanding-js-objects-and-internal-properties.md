@@ -8,7 +8,7 @@ published: true
 
 - [Introduction](#introduction)
 - [What is a Property](#what-is-a-property)
-- [Properties of Properties](#properties-of-properties)
+- [Properties of Property](#properties-of-property)
 - [How to Create a Fully Configured Object](#how-to-create-a-fully-configured-object)
 - [How to Define Getters and Setters for Object Properties](#how-to-define-getters-and-setters-for-object-properties)
 - [Object Freeze Method](#object-freeze-method)
@@ -29,7 +29,7 @@ const person = {
 };
 ```
 
-## Properties of Properties
+## Properties of Property
 
 Every property has its own properties. We should not imagine them as a nested object but as a configuration.
 They are divided into four types:
@@ -222,7 +222,7 @@ try {
 
 Once we define a property as non-configurable, there is only one behavior we can change -> if a property is writable, we can convert it to non-writable.
 
-**We CANNOT convert it from non-writable to writable**
+#### We CANNOT convert it from non-writable to writable
 
 ```javascript
 const person = {
@@ -244,7 +244,7 @@ try {
 }
 ```
 
-**We CAN covert it from writable to non-writable**
+#### We CAN covert it from writable to non-writable
 
 ```javascript
 const person = {
@@ -270,7 +270,7 @@ console.log(Object.getOwnPropertyDescriptor(person, 'dateOfBirth'));
 // }
 ```
 
-**We CANNOT delete property if it is set to non-configurable**
+#### We CANNOT delete property if it is set to non-configurable
 
 ```javascript
 const person = {
@@ -289,7 +289,7 @@ delete person.dateOfBirth;
 console.log(person); // {firstName: 'John', dateOfBirth: 1990}
 ```
 
-**We CAN delete property if it is set to configurable**
+#### We CAN delete property if it is set to configurable
 
 ```javascript
 const person = {
@@ -472,8 +472,8 @@ These methods allow us to define and manipulate properties on objects:
 
 Object.freeze() makes an object immutable by preventing any changes to its properties, including adding, modifying, or deleting them. In contrast, Object.seal() prevents new properties from being added and existing ones from being deleted, but allows modification of property values if they are writable (by default they are).
 
-<hr>
+---
 
-#### Thank you for reading!
+Thank you for reading!
 
-##### I would be grateful to understand your opinion.
+I would be grateful to understand your opinion.
