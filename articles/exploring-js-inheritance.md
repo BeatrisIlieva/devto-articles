@@ -9,9 +9,10 @@ published: true
 1. [Introduction](#introduction)
 2. [Object Prototypes](#object-prototypes)
 3. [Function Prototype Property](#function-prototype-property)
-4. [New Keyword](#new-keyword)
+4. [The New Keyword](#the-new-keyword)
 5. [Prototype Inheritance](#prototype-inheritance)
-6. [Class Inheritance](#class-inheritance)
+6. [Class Inheritance vs Prototypes](#class-inheritance-vs-prototypes)
+7. [Summary](#summary)
 
 ## Introduction
 
@@ -450,7 +451,9 @@ daisyCat.eat(); // Cat is a Carnivore.
 
 This approach follows the principles of prototype inheritance in JavaScript, allowing us to reuse functionality while keeping memory usage efficient.
 
-## Class Inheritance vs. Prototypes
+## Class Inheritance vs Prototypes
+
+While both methods result in prototype-based inheritance, class inheritance is more structured and easier to use. In contrast, traditional prototype inheritance requires manually linking prototypes and can feel more complex.
 
 ```javascript
 // Define a base class called Animal
@@ -492,27 +495,49 @@ daisyCat.meow(); // Daisy says meow.
 
 // Calling the eat method from the Animal class (inherited)
 daisyCat.eat(); // Cat is a Carnivore.
+
+const tomCat = new Cat('Tom', 'Persian');
+
+console.log(tomCat.meow === daisyCat.meow); // true
 ```
+
+Using classes makes object-oriented principles easier to implement and understand in JavaScript. It improves readability, and maintainability, and allows for clear inheritance structures. Although class inheritance in JavaScript is built on prototypes under the hood, it provides a much more familiar syntax for developers coming from other OOP languages.
 
 ## Summary
 
-### In JS we have fours ways to create a new instance of an object:
+### In JS we have fours ways to create a new instance of an object
 
 1. By using an object literal
 2. By using a factory function
 3. By using the class syntax
 4. By using a function constructor
 
-### What is an own member
+### Prototypes
+
+1. Every JS object has a prototype, a reference to another object, allowing memory-efficient property and method sharing.
+2. A prototype is a reference to an object.
+
+### Function Constructor & Prototype Property
+
+1. Function Constructors create objects, but without optimization, each instance has separate methods.
+2. Adding methods to prototype improves memory efficiency by sharing a single method across instances.
 
 ### Difference between object create and object assign
 
-Object.assign() copies an object's own properties into a new object but does not retain prototype chain inheritance.
-Object.create() creates a new object with an existing object as its prototype, preserving inheritance without copying properties.
+1. `Object.assign()` copies an object's own properties into a new object but does not retain prototype chain inheritance.
+2. `Object.create() `creates a new object with an existing object as its prototype, preserving inheritance without copying properties.
 
 ### Difference between `prototype property` and `proto`
 
 1. `proto` is a property of objects and refers to their prototypes.
-2. `prototype` is a property of functions that will be set as a prototype to the objects created by a given function constructor
+2. `prototype` is a property of functions that will be set as a prototype to the objects created by a given function constructor.
 
-### `prototype` is an object
+#### Conclusion
+
+Prototypes form the foundation of JavaScript’s inheritance model, enabling efficient memory usage and code reuse. While prototype-based inheritance is powerful, class syntax provides a cleaner and more intuitive approach while achieving the same functionality.
+
+---
+
+Thank you for reading!
+
+I would be grateful to understand your opinion.
