@@ -11,18 +11,24 @@ published: true
 3. [Function Prototype Property](#function-prototype-property)
 4. [New Keyword](#new-keyword)
 5. [Prototype Inheritance](#prototype-inheritance)
+6. [Class Inheritance](#class-inheritance)
 
 ## Introduction
 
-Inheritance allows us to pass properties and methods from one object to another. Let's get as an example the objects _person_ and _employee_. Each person have properties like _age_ and _heigh_ and methods like _breathing_ and _eating_. Does the _employee_ have them? Sure, an employee IS a person. Thus, instead of duplicating the person's characteristics and behaviors into the employee object, we can follow the DRY (Don't Repeat Yourself) principle. By doing that, we decrease the quantity of the code and respectively the amount of potentials bugs while keeping it easy to extend, read and understand.
+Inheritance allows objects to share properties and methods, reducing code duplication. Consider the objects `Person` and `Employee`. A person has properties like `age` and `height` and methods like `breathing` and `eating`. Does an employee have them? Absolutely—because an employee **is** a person. Instead of duplicating these characteristics, we follow the **DRY (Don't Repeat Yourself) principle**, which minimizes code repetition, reduces potential bugs, and improves readability.
 
-Inheritance is key feature of OOP (Object-oriented programming). OOP is at the heart of languages such as Java, C# and Python. Everything revolves around classes and objects, and we must use OOP principles to write most applications. In contrast, JavaScript (JS) is a prototype-based language. A prototype inheritance is way to link objects in a _prototype chain_ so they can use each other's _members_ (properties and methods) **as if their own**. Every object is JS has its prototype.
+Inheritance is a **key feature of Object-Oriented Programming (OOP)** — the foundation of languages like Java, C#, and Python. In these languages, everything revolves around **classes and objects**. JavaScript (JS), however, is **prototype-based**. Instead of class-based inheritance, it uses **prototype chains** to allow objects to access the properties and methods of their prototypes **as if they were their own**. Every object in JavaScript has a prototype.
 
-Imagine you are at work and you have forgotten your charger. You ask a colleague to borrow theirs. In this case, you do not have your own charger, but you use one as if it was your own. Does that mean that the charger get's copied? No, there is only one charger - the one of your colleague (your prototype). After your device is charged, you return the charger.
+To understand this, imagine you're at work and forgot your charger. You borrow a colleague’s charger and use it **as if it were yours**. But does that mean you made a copy of it? No, there’s only **one charger** — your colleague’s (your prototype). After charging your device, you return it.
 
-From this, we can confidently embrace the nearly philosophical notion that, in OOP inheritance, the relationship is defined by what an object **IS**, whereas in prototypal inheritance, the relationship is defined by what an object **HAS**.
+Similarly, in JavaScript, objects don’t copy members from their prototypes. They simply **borrow** them when needed.
 
-> **Note:** The prototype chain and OOP inheritance are one-way relationships -> prototypes and parent classes do not have access to the members of their descendants.
+Thus, we can make a philosophical distinction:
+
+1. **OOP inheritance** defines relationships based on what an object **is**.
+2. **Prototype inheritance** defines relationships based on what an object **has**.
+
+> **Note:** In both OOP and prototype inheritance, the relationship is one-way—parent objects (prototypes or classes) do not inherit from their children.
 
 ## Object Prototypes
 
@@ -77,26 +83,6 @@ _The grand daughter does not have the ability to solve algebra problems but uses
 console.log(grandDaughter.__proto__ === daughter); // true
 ```
 
-Before we continue let's remember the difference between accessing a property name using the bracket syntax versus the method `hasOwnProperty()`:
-
-```javascript
-const obj = {
-    a: undefined
-};
-
-if (obj['a']) {
-    console.log(obj['a']);
-} else {
-    console.log('Falsy value'); // Falsy value
-}
-
-if (obj.hasOwnProperty('a')) {
-    console.log(obj['a']); // undefined
-}
-```
-
-The conclusion is that the method `hasOwnProperty()` checks if the property exists on the object, regardless of its value.
-
 Now let's check if the grand daughter owns the method `solveAlgebraProblems`?
 
 ```javascript
@@ -128,6 +114,12 @@ console.log(grandMather.hasOwnProperty('pencil')); // false
 console.log(daughter.hasOwnProperty('notebook')); // false
 ```
 
+> **Note:** The methods `setPrototypeOf()` and `writeGeometryProof()` are not present in the `grandDaughter` object. The `grandDaughter` object contains only its own members.
+
+```javascript
+console.log(grandDaughter); // {pencil: true, notebook: true}
+```
+
 ### Accessing object members
 
 #### `for...in` loop
@@ -142,14 +134,6 @@ for (const key in grandDaughter) {
 // notebook
 // solveAlgebraProblems
 // writeGeometryProof
-```
-
-#### `JSON.stringify()`
-
-Only the own members are included in the JSON string
-
-```javascript
-console.log(JSON.stringify(grandDaughter)); // {"pencil":true,"notebook":true}
 ```
 
 #### 'Object.keys()`
@@ -267,7 +251,7 @@ This approach is more memory-efficient because instead of duplicating properties
 
 _Key terms:_
 
-## **`.prototype`**: function prototype property
+1. **`.prototype`**: function prototype property
 
 > **Note:** Functions do NOT have prototypes. Functions have prototype property. Objects have prototypes.
 
@@ -275,7 +259,7 @@ Each function has a `prototype property`, which refers to an object, just like a
 
 ### Function constructor
 
-In JS `function constructor` is a special type function that allows us to create objects. However, it neither a factory function nor a class.
+In JS `function constructor` is a special type function that allows us to create objects. However, it is neither a factory function nor a class.
 
 > **Note:** A function constructor's name is written in `PascalCase`. When we see a name written in PascalCase, we know that it should be invoked using the `new` keyword.
 
@@ -389,7 +373,7 @@ console.log(person); // Person {firstName: 'Michel', lastName: 'Smit'}
 person.efficientStudy(); // Michel Smit is efficiently studying.
 ```
 
-#### What Does the new Keyword Do
+#### What Does the `new` Keyword Do
 
 The `newOperator` function replicates the behavior of the `new` keyword. Here’s what it does step by step:
 
@@ -456,15 +440,59 @@ daisyCat.eat(); // Cat is a Carnivore.
 
 ### How It Works
 
-1. The Cat constructor defines its own properties (name and breed).
-2. It then calls Animal.call(this, 'Cat', 'Carnivore'), which executes the Animal constructor, assigning the properties species and speciesDiet to this (the new Cat instance).
+1. The `Cat` constructor defines its own properties (`name` and `breed`).
+2. It then calls `Animal.call(this, 'Cat', 'Carnivore')`, which executes the `Animal` constructor, assigning the properties `species` and `speciesDiet` to `this` (the new `Cat` instance).
 3. We manually set up the prototype chain:
-    1. Cat.prototype is assigned a new object that inherits from Animal.prototype.
-    2. This ensures that instances of Cat can access methods from Animal.prototype.
-4. The meow method is added to Cat.prototype, making it specific to Cat instances.
-5. Now, daisyCat has access to both meow() (from Cat.prototype) and eat() (from Animal.prototype), demonstrating prototype-based inheritance.
+    1. `Cat.prototype` is assigned a new object that inherits from `Animal.prototype`.
+    2. This ensures that instances of `Cat` can access methods from `Animal.prototype`.
+4. The `meow` method is added to `Cat.prototype`, making it specific to `Cat` instances.
+5. Now, `daisyCat` has access to both `meow()` (from `Cat.prototype`) and `eat()` (from `Animal.prototype`), demonstrating prototype-based inheritance.
 
 This approach follows the principles of prototype inheritance in JavaScript, allowing us to reuse functionality while keeping memory usage efficient.
+
+## Class Inheritance
+
+```javascript
+// Define a base class called Animal
+class Animal {
+    constructor(species, speciesDiet) {
+        this.species = species;
+        this.speciesDiet = speciesDiet;
+    }
+    // Method that all animals will have
+    eat() {
+        console.log(`${this.species} is a ${this.speciesDiet}.`);
+    }
+}
+
+// Define a subclass called Cat that extends Animal
+class Cat extends Animal {
+    constructor(name, breed) {
+        // Call the parent class constructor with super()
+        super('Cat', 'Carnivore');
+
+        this.name = name;
+        this.breed = breed;
+    }
+
+    // Method specific to the Cat class
+    meow() {
+        console.log(`${this.name} says meow.`);
+    }
+}
+
+// Create a new instance of the Cat class
+const daisyCat = new Cat('Daisy', 'Angora');
+
+// Logging the properties of daisyCat
+console.log(daisyCat); // Cat {species: 'Cat', speciesDiet: 'Carnivore', name: 'Daisy', breed: 'Angora'}
+
+// Calling the meow method from the Cat class
+daisyCat.meow(); // Daisy says meow.
+
+// Calling the eat method from the Animal class (inherited)
+daisyCat.eat(); // Cat is a Carnivore.
+```
 
 ## Summary
 
