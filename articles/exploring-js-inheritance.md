@@ -189,7 +189,9 @@ firstCat.meow(); // Daisy says meow
 secondCat.meow(); // Tom says meow
 ```
 
-_What's improved_
+---
+
+What's improved
 
 ---
 
@@ -320,7 +322,9 @@ console.log(
 ); // true
 ```
 
-_What's improved_
+---
+
+What's improved
 
 ---
 
