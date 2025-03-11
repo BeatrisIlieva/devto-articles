@@ -335,7 +335,7 @@ But how is the context of the `this` keyword set correctly? Let’s analyze it a
 const firstPerson = new Person('John', 'Doe');
 ```
 
-Didn’t we say that the context of `this` depends on how a function is invoked? In this case, we are calling it using the `new` keyword.
+We know that the context of `this` depends on how a function is invoked. In this case, we are calling it using the `new` keyword.
 
 Let's break down what the `new` keyword actually does by mimicking its behavior with a custom function, `newOperator`.
 
@@ -450,7 +450,7 @@ daisyCat.eat(); // Cat is a Carnivore.
 
 This approach follows the principles of prototype inheritance in JavaScript, allowing us to reuse functionality while keeping memory usage efficient.
 
-## Class Inheritance
+## Class Inheritance vs. Prototypes
 
 ```javascript
 // Define a base class called Animal
