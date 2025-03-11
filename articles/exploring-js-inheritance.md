@@ -137,7 +137,7 @@ for (const key in grandDaughter) {
 // writeGeometryProof
 ```
 
-#### 'Object.keys()`
+#### Object.keys()
 
 Only the own members are included in the array
 
@@ -197,7 +197,7 @@ What's improved
 
 Both cats will use the same `meow` method -> only one reference is created in memory. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
 
-### `Object.assign()`
+### Object.assign()
 
 The `Object.assign()` method creates a shallow copy of an object's **own** properties (excluding inherited properties from the prototype chain) and assigns them to a target object.
 
