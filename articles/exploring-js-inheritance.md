@@ -189,7 +189,9 @@ firstCat.meow(); // Daisy says meow
 secondCat.meow(); // Tom says meow
 ```
 
-#### What's improved
+_What's improved_
+
+---
 
 Both cats will use the same `meow` method -> only one reference is created in memory. There is no difference in execution because the context of the `this` keyword will always be correct — whether we invoke the method through the `firstCat` object or the `secondCat` object.
 
@@ -219,7 +221,7 @@ Since `Object.assign()` only copies **own** properties, the `meow` method (which
 
 ### `Object.create()`
 
-The `Object.create() `method creates a new object with the specified object as its **prototype**. This means the new object does not get copies of the properties but instead **inherits** them.
+The `Object.create()` method creates a new object with the specified object as its **prototype**. This means the new object does not get copies of the properties but instead **inherits** them.
 
 ```javascript
 const daisyCat = {
@@ -318,7 +320,9 @@ console.log(
 ); // true
 ```
 
-#### What's improved
+_What's improved_
+
+---
 
 The `prototype property of a function` holds an object, and this object is assigned as the prototype to all objects created using that function as a constructor.
 
@@ -374,7 +378,7 @@ console.log(person); // Person {firstName: 'Michel', lastName: 'Smit'}
 person.efficientStudy(); // Michel Smit is efficiently studying.
 ```
 
-#### What Does the `new` Keyword Do
+### What Does the `new` Keyword Do
 
 The `newOperator` function replicates the behavior of the `new` keyword. Here’s what it does step by step:
 
@@ -525,7 +529,7 @@ Using classes makes object-oriented principles easier to implement and understan
 ### Difference between object create and object assign
 
 1. `Object.assign()` copies an object's own properties into a new object but does not retain prototype chain inheritance.
-2. `Object.create() `creates a new object with an existing object as its prototype, preserving inheritance without copying properties.
+2. `Object.create()`creates a new object with an existing object as its prototype, preserving inheritance without copying properties.
 
 ### Difference between `prototype property` and `proto`
 
