@@ -34,8 +34,19 @@ Together, the web client and web server communicate to deliver content and funct
 ## HTTP Request Methods
 
 With HTTP methods, we specify the action that should be performed on the server. A method is a property of the request that tells the server the client's intention, such as creating, retrieving, updating, or deleting data.
+🔍 GET: By sending a GET request, we ask the server to retrieve a resource. An example of a GET request is opening a website’s home page. The server responds by sending all the necessary resources (HTML, CSS, JavaScript, fonts, etc.) so we can see the page content.
 
-1. 🔍 GET: (representing searching or retrieving data)
-2. ✉️  POST: (representing sending data or submitting information)
-3. 🔄 PUT:(representing updating or replacing data)
-4. 🗑️  DELETE: (representing deleting or removing data)
+1. ✉️ POST: By making a POST request, we tell the server that we intend to create new data. For example, when a user registers on a website, a POST request is sent with their username, email, and password. The server processes this data and creates the account.
+
+2. 🔄 PUT: By making a PUT request, we indicate that we want to modify existing data. For example, if a user submits an incorrect first name during registration and needs to correct it, they can send a PUT request with the updated information.
+
+3. 🗑️ DELETE: By sending a DELETE request, we instruct the server to remove a resource. For example, if a user decides to close their account, a DELETE request can be sent to remove their data.
+
+4. 🛠️ PATCH: A PATCH request is used for making partial updates to a resource. The key difference between PATCH and PUT is that PUT requires sending the entire updated resource, whereas PATCH allows updating only specific fields. For example, if a blog post has a title, author, and description, and we want to update only the title:
+
+    1. **PUT**: We must send the entire updated resource, including the title, author, and description.
+    2. **PATCH**: We can send only the new title, leaving the other fields unchanged.
+
+5. 🔎 HEAD: A HEAD request is used to retrieve only the headers of a response, without the response body. This is useful for checking metadata (such as content length or last modified date) before making a full request.
+
+6. ⚙️ OPTIONS: The OPTIONS request is used to check which HTTP methods are supported by the server for a specific URL. This is often used in preflight requests in CORS (Cross-Origin Resource Sharing) scenarios.
