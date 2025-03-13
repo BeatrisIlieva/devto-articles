@@ -108,8 +108,8 @@ An HTTP response has a structure similar to a request.
 
 The response body contains the actual content sent by the server. 
 
-```
-<CRLF> (indicates a new line)
+```html
+<CRLF>
 <html>
     <head>
         <title>Some Title</title>
@@ -123,6 +123,11 @@ The response body contains the actual content sent by the server.
 
 ## Status code
 
-1. 200 (and around) - the server says that it received the request and everything went fine
-2. 300
-3. 400 - the server received the request, not an error occured it is juts that for example the content does not exists
+HTTP status codes indicate the outcome of a request. They are grouped into different ranges based on their meaning:
+
+1. 200 (and similar) – The request was successfully received, processed, and responded to by the server.
+2. 301/302 - The requested resource has been moved to a different location 
+3. 400 (and similar) – The request was received and understood, but there was an issue on the client's side (e.g., missing resource, bad request format). These are not server errors but rather issues caused by the request itself.
+4. 500 (and similar) – The request was sent correctly, but an internal server error occurred while processing it. This indicates a problem on the server's side.
+
+For a full list of HTTP status codes, check out 👉 https://http.cat/ 🐱
