@@ -50,3 +50,15 @@ With HTTP methods, we specify the action that should be performed on the server.
 5. 🔎 HEAD: A HEAD request is used to retrieve only the headers of a response, without the response body. This is useful for checking metadata (such as content length or last modified date) before making a full request.
 
 6. ⚙️ OPTIONS: The OPTIONS request is used to check which HTTP methods are supported by the server for a specific URL. This is often used in preflight requests in CORS (Cross-Origin Resource Sharing) scenarios.
+
+## Request
+
+A request contains of:
+
+1. Headers: contain the so called meta data about the request - all the information needed to the request can reach to the server.
+
+    1. [OBLIGATORY] The first header (request line) contains the request method, the pathname and the HTTP protocol version that we follow -> **GET /SomeUsername?tab=repositories HTTP/1.1**
+
+    2. [OBLIGATORY] The second header contains the domain name (the client checks in NAME SERVER that resolves a url and returns an IP Address that corresponds to the given domain name) -> **Host: github.com**
+
+### [Optionally] Body: the content of the request. We send the user email and password so they can be saved so the user can login each time from now on.
