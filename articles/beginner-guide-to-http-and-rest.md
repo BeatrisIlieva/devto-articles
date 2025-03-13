@@ -57,8 +57,27 @@ A request contains of:
 
 1. Headers: contain the so called meta data about the request - all the information needed to the request can reach to the server.
 
-    1. [OBLIGATORY] The first header (request line) contains the request method, the pathname and the HTTP protocol version that we follow -> **GET /SomeUsername?tab=repositories HTTP/1.1**
+    1. [OBLIGATORY] The first header (request line) contains the request method, the pathname and the HTTP protocol version that we follow:
 
-    2. [OBLIGATORY] The second header contains the domain name (the client checks in NAME SERVER that resolves a url and returns an IP Address that corresponds to the given domain name) -> **Host: github.com**
+    ```
+     GET /Username/RepoName/issues/new HTTP/1.1
+    ```
 
-### [Optionally] Body: the content of the request. We send the user email and password so they can be saved so the user can login each time from now on.
+    2. [OBLIGATORY] The second header contains the domain name (the client checks in NAME SERVER that resolves a url and returns an IP Address that corresponds to the given domain name):
+
+    ```
+     Host: github.com
+    ```
+
+The rest headers are optional.
+
+2. [Optionally] Body: the content of the request. Here we send the title and the description of the issue (usually we do not send body in a GET request)
+
+```
+<CRLF> (indicates a new line)
+{
+    "title": "Found a bug",
+    "description" "Working on it"
+}
+<CRLF>
+```
