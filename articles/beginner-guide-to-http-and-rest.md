@@ -69,7 +69,7 @@ An HTTP request consists of two main parts:
      Host: github.com
     ```
 
-    3. Other Headers (Optional) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+    3. Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
     ```
     Content-Type: application/json
@@ -98,7 +98,7 @@ An HTTP response has a structure similar to a request.
      HTTP/1.1 200 OK
     ```
 
-    2. Other Headers (Optional) – Additional headers provide extra information about the response. In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+    2. Other Headers –  In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
     ```
     Content-Type: text/html
