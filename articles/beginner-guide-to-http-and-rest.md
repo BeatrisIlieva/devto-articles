@@ -72,7 +72,7 @@ With `HTTP methods`, we specify the **action** that should be performed on the s
 
 An HTTP request consists of two main parts:
 
-### Headers
+### Request Headers
 
 Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
@@ -92,7 +92,7 @@ Specifies the domain name of the server. The client first checks with a Name Ser
 Host: github.com;
 ```
 
-#### Other Headers
+#### Other Request Headers
 
 Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
@@ -100,7 +100,7 @@ Additional headers provide extra information about the request. In this example,
 Content-Type: application/json
 ```
 
-### Body
+### Request Body
 
 The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
 
@@ -117,7 +117,7 @@ The actual content of the request, typically included in methods like POST and P
 
 An HTTP response has a structure similar to a request.
 
-### Headers
+### Response Headers
 
 #### Status Line
 
@@ -127,7 +127,7 @@ The status code indicates whether the request was successful or not. It consists
 HTTP/1.1 200 OK
 ```
 
-#### Other Headers
+#### Other Response Headers
 
 In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
@@ -135,7 +135,7 @@ In this example, the server specifies that the returned content is in HTML forma
 Content-Type: text/html
 ```
 
-### Body
+### Response Body
 
 The response body contains the actual content sent by the server.
 
@@ -184,37 +184,37 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 #### Examples
 
-1. **Create a new article** (POST request to create a resource):
+##### Create a new article (POST request to create a resource)
 
 ```javascript
 POST: https://some-service.org/articles
 ```
 
-2. **Get all articles** (Retrieve all resources):
+##### Get all articles (Retrieve all resources)
 
 ```javascript
 GET: https://some-service.org/articles
 ```
 
-3. **Get a specific article** (Use a unique identifier):
+##### Get a specific article (Use a unique identifier)
 
 ```javascript
 GET: https://some-service.org/articles/73635
 ```
 
-4. **Delete an article** (Remove a resource):
+##### Delete an article (Remove a resource)
 
 ```javascript
 DELETE: https://some-service.org/articles/73635
 ```
 
-5. **Replace an existing article** (Update the entire resource):
+##### Replace an existing article (Update the entire resource)
 
 ```javascript
 PUT: https://some-service.org/articles/73635
 ```
 
-6. **Modify an existing article** (Partial update):
+##### Modify an existing article (Partial update)
 
 ```javascript
 PATCH: https://some-service.org/articles/73635
