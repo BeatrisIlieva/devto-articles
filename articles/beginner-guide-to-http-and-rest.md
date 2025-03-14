@@ -55,27 +55,28 @@ With HTTP methods, we specify the action that should be performed on the server.
 
 An HTTP request consists of two main parts:
 
-1. Headers – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
+1.  Headers – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
-    1. [Mandatory] Request Line – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
+        1. [Mandatory] Request Line – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
-    ```
-     GET /Username/RepoName/issues/new HTTP/1.1
-    ```
+        ```http
+         GET /Username/RepoName/issues/new HTTP/1.1
+        ```
 
-    2. [Mandatory] Host Header – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+        2. [Mandatory] Host Header – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
 
-    ```
-     Host: github.com
-    ```
+        ```http
+         Host: github.com
+        ```
 
-    3. Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+        3. Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
-    ```
-    Content-Type: application/json
-    ```
+        ```http
+        Content-Type: application/json
+        ```
+        Learn more about MIME types here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types
 
-2. Body (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
+2.  Body (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
 
 ```json
 <CRLF> (indicates a new line)
@@ -94,31 +95,32 @@ An HTTP response has a structure similar to a request.
 
     1. [Mandatory] Status Line – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
-    ```
+    ```http
      HTTP/1.1 200 OK
     ```
 
-    2. Other Headers –  In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+    2. Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
-    ```
+    ```http
     Content-Type: text/html
     ```
 
 2. Body
 
-The response body contains the actual content sent by the server. 
+The response body contains the actual content sent by the server.
 
 ```html
 <CRLF>
-<html>
-    <head>
-        <title>Some Title</title>
-    </head>
-    <body>
-        <h1>Test HTML page</h1>
-    </body>
-</html>
-<CRLF>
+    <html>
+        <head>
+            <title>Some Title</title>
+        </head>
+        <body>
+            <h1>Test HTML page</h1>
+        </body>
+    </html>
+    <CRLF></CRLF
+></CRLF>
 ```
 
 ## Status code
@@ -126,7 +128,7 @@ The response body contains the actual content sent by the server.
 HTTP status codes indicate the outcome of a request. They are grouped into different ranges based on their meaning:
 
 1. 200 (and similar) – The request was successfully received, processed, and responded to by the server.
-2. 301/302 - The requested resource has been moved to a different location 
+2. 301/302 - The requested resource has been moved to a different location
 3. 400 (and similar) – The request was received and understood, but there was an issue on the client's side (e.g., missing resource, bad request format). These are not server errors but rather issues caused by the request itself.
 4. 500 (and similar) – The request was sent correctly, but an internal server error occurred while processing it. This indicates a problem on the server's side.
 
