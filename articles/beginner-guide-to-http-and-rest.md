@@ -74,19 +74,19 @@ An HTTP request consists of two main parts:
 
 1. **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
-    1. [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
+    - [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
     ```http
         GET /Username/RepoName/issues/new HTTP/1.1
     ```
 
-    2. [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+    - [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
 
     ```http
         Host: github.com
     ```
 
-    3. Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+    - Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
     ```http
     Content-Type: application/json
@@ -109,13 +109,13 @@ An HTTP response has a structure similar to a request.
 
 1. **Headers**
 
-    1. [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
+    - [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
     ```http
      HTTP/1.1 200 OK
     ```
 
-    2. Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+    - Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
     ```http
     Content-Type: text/html
