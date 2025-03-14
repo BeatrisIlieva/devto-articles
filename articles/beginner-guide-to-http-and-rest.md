@@ -74,23 +74,23 @@ An HTTP request consists of two main parts:
 
 1. **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
-    - [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
+- [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
-    ```javascript
-        GET /Username/RepoName/issues/new HTTP/1.1
-    ```
+```javascript
+    GET /Username/RepoName/issues/new HTTP/1.1
+```
 
-    - [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+- [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
 
-    ```javascript
-        Host: github.com
-    ```
+```javascript
+    Host: github.com
+```
 
-    - Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+- Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
-    ```javascript
-    Content-Type: application/json
-    ```
+```javascript
+Content-Type: application/json
+```
 
 2. **Body** (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
 
@@ -109,17 +109,17 @@ An HTTP response has a structure similar to a request.
 
 1. **Headers**
 
-    - [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
+- [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
-    ```javascript
-     HTTP/1.1 200 OK
-    ```
+```javascript
+    HTTP/1.1 200 OK
+```
 
-    - Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+- Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
-    ```javascript
-    Content-Type: text/html
-    ```
+```javascript
+Content-Type: text/html
+```
 
 2. **Body**
 
@@ -172,39 +172,39 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 1. **Create a new article** (POST request to create a resource):
 
-    ```javascript
-    POST: https://some-service.org/articles
-    ```
+```javascript
+POST: https://some-service.org/articles
+```
 
 2. **Get all articles** (Retrieve all resources):
 
-    ```javascript
-    GET: https://some-service.org/articles
-    ```
+```javascript
+GET: https://some-service.org/articles
+```
 
 3. **Get a specific article** (Use a unique identifier):
 
-    ```javascript
-    GET: https://some-service.org/articles/73635
-    ```
+```javascript
+GET: https://some-service.org/articles/73635
+```
 
 4. **Delete an article** (Remove a resource):
 
-    ```javascript
-    DELETE: https://some-service.org/articles/73635
-    ```
+```javascript
+DELETE: https://some-service.org/articles/73635
+```
 
 5. **Replace an existing article** (Update the entire resource):
 
-    ```javascript
-    PUT: https://some-service.org/articles/73635
-    ```
+```javascript
+PUT: https://some-service.org/articles/73635
+```
 
 6. **Modify an existing article** (Partial update):
 
-    ```javascript
-    PATCH: https://some-service.org/articles/73635
-    ```
+```javascript
+PATCH: https://some-service.org/articles/73635
+```
 
 As seen in the examples above, _REST allows us to perform all CRUD operations using a consistent URI structure_. By simply knowing the resource name and following REST principles, we can easily interact with the API.
 
