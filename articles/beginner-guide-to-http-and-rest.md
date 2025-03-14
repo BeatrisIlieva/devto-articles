@@ -76,19 +76,19 @@ An HTTP request consists of two main parts:
 
     - [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
-    ```markdown
+    ```javascript
         GET /Username/RepoName/issues/new HTTP/1.1
     ```
 
     - [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
 
-    ```markdown
+    ```javascript
         Host: github.com
     ```
 
     - Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
-    ```markdown
+    ```javascript
     Content-Type: application/json
     ```
 
@@ -111,13 +111,13 @@ An HTTP response has a structure similar to a request.
 
     - [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
-    ```markdown
+    ```javascript
      HTTP/1.1 200 OK
     ```
 
     - Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
-    ```markdown
+    ```javascript
     Content-Type: text/html
     ```
 
@@ -125,7 +125,7 @@ An HTTP response has a structure similar to a request.
 
 The response body contains the actual content sent by the server.
 
-```markdown
+```javascript
 <CRLF>
     <html>
         <head>
@@ -172,37 +172,37 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 1. **Create a new article** (POST request to create a resource):
 
-    ```markdown
+    ```javascript
     POST: https://some-service.org/articles
     ```
 
 2. **Get all articles** (Retrieve all resources):
 
-    ```markdown
+    ```javascript
     GET: https://some-service.org/articles
     ```
 
 3. **Get a specific article** (Use a unique identifier):
 
-    ```markdown
+    ```javascript
     GET: https://some-service.org/articles/73635
     ```
 
 4. **Delete an article** (Remove a resource):
 
-    ```markdown
+    ```javascript
     DELETE: https://some-service.org/articles/73635
     ```
 
 5. **Replace an existing article** (Update the entire resource):
 
-    ```markdown
+    ```javascript
     PUT: https://some-service.org/articles/73635
     ```
 
 6. **Modify an existing article** (Partial update):
 
-    ```markdown
+    ```javascript
     PATCH: https://some-service.org/articles/73635
     ```
 
