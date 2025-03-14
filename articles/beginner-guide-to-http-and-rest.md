@@ -72,27 +72,37 @@ With `HTTP methods`, we specify the **action** that should be performed on the s
 
 An HTTP request consists of two main parts:
 
-1. **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
+### Headers
 
-[Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
+Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
-```javascript
-GET /Username/RepoName/issues/new HTTP/1.1
-```
+#### Request Line
 
-[Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
 ```javascript
-Host: github.com
+GET / Username / RepoName / issues / new HTTP() / 1.1;
 ```
 
-**Other Headers** (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+#### Host Header
+
+Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+
+```javascript
+Host: github.com;
+```
+
+#### Other Headers
+
+Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
 
 ```javascript
 Content-Type: application/json
 ```
 
-2. **Body** (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
+### Body
+
+The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
 
 ```javascript
 <CRLF> (indicates a new line)
@@ -107,21 +117,25 @@ Content-Type: application/json
 
 An HTTP response has a structure similar to a request.
 
-1. **Headers**
+### Headers
 
-[Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
+#### Status Line
+
+The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
 ```javascript
 HTTP/1.1 200 OK
 ```
 
-**Other Headers**  – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+#### Other Headers
+
+In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
 
 ```javascript
 Content-Type: text/html
 ```
 
-2. **Body**
+### Body
 
 The response body contains the actual content sent by the server.
 
