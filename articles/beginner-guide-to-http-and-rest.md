@@ -72,29 +72,39 @@ With `HTTP methods`, we specify the **action** that should be performed on the s
 
 An HTTP request consists of two main parts:
 
-1. **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
+### Request Headers
 
-    - [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
+Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
-    ```javascript
-        GET /Username/RepoName/issues/new HTTP/1.1
-    ```
+#### Request Line
 
-    - [Mandatory] **Host Header** – Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
+The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
-    ```javascript
-        Host: github.com
-    ```
+```javascript
+GET / Username / RepoName / issues / new HTTP() / 1.1;
+```
 
-    - Other Headers (Optional only if there is no body) – Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+#### Host Header
 
-    ```javascript
-    Content-Type: application/json
-    ```
+Specifies the domain name of the server. The client first checks with a Name Server (DNS), which resolves the domain into an IP address before making the request:
 
-2. **Body** (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
+```javascript
+Host: github.com;
+```
 
-```json
+#### Other Request Headers
+
+Additional headers provide extra information about the request. In this example, we specify that the request body is formatted as JSON, allowing the server to correctly parse the received text:
+
+```javascript
+Content-Type: application/json
+```
+
+### Request Body
+
+The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
+
+```javascript
 <CRLF> (indicates a new line)
 {
     "title": "Found a bug",
@@ -107,21 +117,25 @@ An HTTP request consists of two main parts:
 
 An HTTP response has a structure similar to a request.
 
-1. **Headers**
+### Response Headers
 
-    - [Mandatory] **Status Line** – The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
+#### Status Line
 
-    ```javascript
-     HTTP/1.1 200 OK
-    ```
+The status code indicates whether the request was successful or not. It consists of a numeric status code and a corresponding status message, informing the client about the outcome of the request.
 
-    - Other Headers – In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+```javascript
+HTTP/1.1 200 OK
+```
 
-    ```javascript
-    Content-Type: text/html
-    ```
+#### Other Response Headers
 
-2. **Body**
+In this example, the server specifies that the returned content is in HTML format so that the browser knows how to parse and render it correctly:
+
+```javascript
+Content-Type: text/html
+```
+
+### Response Body
 
 The response body contains the actual content sent by the server.
 
@@ -170,41 +184,41 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 #### Examples
 
-1. **Create a new article** (POST request to create a resource):
+##### Create a new article (POST request to create a resource)
 
-    ```javascript
-    POST: https://some-service.org/articles
-    ```
+```javascript
+POST: https://some-service.org/articles
+```
 
-2. **Get all articles** (Retrieve all resources):
+##### Get all articles (Retrieve all resources)
 
-    ```javascript
-    GET: https://some-service.org/articles
-    ```
+```javascript
+GET: https://some-service.org/articles
+```
 
-3. **Get a specific article** (Use a unique identifier):
+##### Get a specific article (Use a unique identifier)
 
-    ```javascript
-    GET: https://some-service.org/articles/73635
-    ```
+```javascript
+GET: https://some-service.org/articles/73635
+```
 
-4. **Delete an article** (Remove a resource):
+##### Delete an article (Remove a resource)
 
-    ```javascript
-    DELETE: https://some-service.org/articles/73635
-    ```
+```javascript
+DELETE: https://some-service.org/articles/73635
+```
 
-5. **Replace an existing article** (Update the entire resource):
+##### Replace an existing article (Update the entire resource)
 
-    ```javascript
-    PUT: https://some-service.org/articles/73635
-    ```
+```javascript
+PUT: https://some-service.org/articles/73635
+```
 
-6. **Modify an existing article** (Partial update):
+##### Modify an existing article (Partial update)
 
-    ```javascript
-    PATCH: https://some-service.org/articles/73635
-    ```
+```javascript
+PATCH: https://some-service.org/articles/73635
+```
 
 As seen in the examples above, _REST allows us to perform all CRUD operations using a consistent URI structure_. By simply knowing the resource name and following REST principles, we can easily interact with the API.
 
