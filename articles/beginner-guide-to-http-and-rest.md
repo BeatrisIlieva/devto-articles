@@ -72,7 +72,7 @@ With `HTTP methods`, we specify the **action** that should be performed on the s
 
 An HTTP request consists of two main parts:
 
-1.  **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
+1. **Headers** – Contain metadata about the request, ensuring that it reaches the server with the necessary information.
 
     1. [Mandatory] **Request Line** – The first line of the request, which includes the HTTP method, the path (URL), and the HTTP version being used:
 
@@ -92,9 +92,7 @@ An HTTP request consists of two main parts:
     Content-Type: application/json
     ```
 
-    Learn more about MIME types here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types
-
-2.  **Body** (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
+2. **Body** (Optional) – The actual content of the request, typically included in methods like POST and PUT, but not in GET requests. In the example below, the body contains the title and description of an issue, formatted as a JSON string:
 
 ```json
 <CRLF> (indicates a new line)
@@ -127,7 +125,7 @@ An HTTP response has a structure similar to a request.
 
 The response body contains the actual content sent by the server.
 
-```
+```http
 <CRLF>
     <html>
         <head>
@@ -148,8 +146,6 @@ HTTP status codes **indicate the outcome of a request**. They are grouped into d
 2. **301/302** - The requested resource has been moved to a different location
 3. **400** (and similar) – The request was received and understood, but there was an **issue on the client's side** (e.g., missing resource, bad request format). These are not server errors but rather issues caused by the request itself.
 4. **500** (and similar) – The request was sent correctly, but an internal server error occurred while processing it. This indicates a **problem on the server's side**.
-
-For a full list of HTTP status codes, check out 👉 https://http.cat/ 🐱
 
 ## REST Services
 
@@ -176,37 +172,37 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 1. **Create a new article** (POST request to create a resource):
 
-```
+```http
 POST: https://some-service.org/articles
 ```
 
 2. **Get all articles** (Retrieve all resources):
 
-```
+```http
 GET: https://some-service.org/articles
 ```
 
 3. **Get a specific article** (Use a unique identifier):
 
-```
+```http
 GET: https://some-service.org/articles/73635
 ```
 
 4. **Delete an article** (Remove a resource):
 
-```
+```http
 DELETE: https://some-service.org/articles/73635
 ```
 
 5. **Replace an existing article** (Update the entire resource):
 
-```
+```http
 PUT: https://some-service.org/articles/73635
 ```
 
 6. **Modify an existing article** (Partial update):
 
-```
+```http
 PATCH: https://some-service.org/articles/73635
 ```
 
