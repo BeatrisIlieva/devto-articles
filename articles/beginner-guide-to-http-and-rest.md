@@ -172,39 +172,39 @@ A RESTful API or RESTful Service refers to a server that follows REST principles
 
 1. **Create a new article** (POST request to create a resource):
 
-```http
-POST: https://some-service.org/articles
-```
+    ```http
+    POST: https://some-service.org/articles
+    ```
 
 2. **Get all articles** (Retrieve all resources):
 
-```http
-GET: https://some-service.org/articles
-```
+    ```http
+    GET: https://some-service.org/articles
+    ```
 
 3. **Get a specific article** (Use a unique identifier):
 
-```http
-GET: https://some-service.org/articles/73635
-```
+    ```http
+    GET: https://some-service.org/articles/73635
+    ```
 
 4. **Delete an article** (Remove a resource):
 
-```http
-DELETE: https://some-service.org/articles/73635
-```
+    ```http
+    DELETE: https://some-service.org/articles/73635
+    ```
 
 5. **Replace an existing article** (Update the entire resource):
 
-```http
-PUT: https://some-service.org/articles/73635
-```
+    ```http
+    PUT: https://some-service.org/articles/73635
+    ```
 
 6. **Modify an existing article** (Partial update):
 
-```http
-PATCH: https://some-service.org/articles/73635
-```
+    ```http
+    PATCH: https://some-service.org/articles/73635
+    ```
 
 As seen in the examples above, _REST allows us to perform all CRUD operations using a consistent URI structure_. By simply knowing the resource name and following REST principles, we can easily interact with the API.
 
