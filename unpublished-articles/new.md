@@ -77,3 +77,58 @@ In this case, the numbers will be printed one after another in the exact order.
 ### Asynchronous Programming
 
 Asynchronous programming allows certain tasks, like fetching data from a server, to run in the background while other code continues to execute. This prevents blocking the entire program, keeping the application responsive. In JavaScript, asynchronous code can execute concurrently, meaning the total execution time depends on the longest task, and the program remains functional while waiting for the result.
+
+#### Approaches to asynchronous programming
+
+#### Callbacks
+
+Let's look at an example using the built-in setTimeout() function. This function accepts two arguments: a callback (a function to execute) and a delay (the time after which the callback will be executed). With setTimeout(), the callback is executed asynchronously after the specified time.
+
+```javascript
+console.log('Before');
+setTimeout(function () {
+    console.log('Meanwhile');
+}, 2000);
+console.log('After');
+```
+
+In a synchronous context, we'd expect to see the following:
+
+1. 'Before'
+2. Wait for 2 seconds
+3. 'Meanwhile'
+4. 'After'
+
+However, the actual output is:
+
+```javascript
+Before;
+After;
+Meanwhile;
+```
+
+Explanation:
+
+1. console.log('Before') is executed immediately.
+2. setTimeout() delegates the callback function to be executed later (after 2 seconds).
+3. console.log('After') is executed immediately after setTimeout() is called, even before the callback runs.
+
+Now, what if we set the callback to execute after 0 seconds?
+
+```javascript
+console.log('Before');
+setTimeout(function () {
+    console.log('Meanwhile');
+}, 0);
+console.log('After');
+```
+
+The output remains the same:
+
+```javascript
+Before;
+After;
+Meanwhile;
+```
+
+This happens because synchronous actions always execute before asynchronous ones, even if the delay is set to 0. The callback is still placed in the event queue and will only be executed after the current stack is cleared.
