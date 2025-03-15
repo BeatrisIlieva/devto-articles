@@ -4,7 +4,14 @@ tags: ['Asynchronous Programming', 'AJAX', 'Promises', ' Async/Await']
 published: true
 ---
 
-**Before you continue, you might want to read [A Beginner’s Guide to HTTP and REST Services](https://dev.to/beatrisilieva/a-beginners-guide-to-http-and-rest-services-3j92).**
+## 📋 Table of Contents
+
+1. [Introduction](#introduction)
+2. [Multi-Threaded vs Single-Threaded in JavaScript](#multi-threaded-vs-single-threaded-in-javascript)
+3. [AJAX](#ajax)
+4. [Synchronous vs Asynchronous Programming](#synchronous-vs-asynchronous-programming)
+5. [Fetch API](#fetch-api)
+6. [Summary](#summary)
 
 ## Abbreviations
 
@@ -13,44 +20,53 @@ published: true
 
 ## Introduction
 
+**Before you continue, you might want to read [A Beginner’s Guide to HTTP and REST Services](https://dev.to/beatrisilieva/a-beginners-guide-to-http-and-rest-services-3j92).**
+
 A request to the backend is an asynchronous operation. When we send a request to the backend to fetch content from a database, we have no control over how long it will take to process. The backend first receives the request, processes it, queries the database, processes the retrieved data, and only then returns a response. The total time required depends on various factors, such as server load, network congestion, and internet speed.
 
 In some cases, the process may take a few seconds, which is a long time in the context of software applications. If users are forced to wait without being able to interact with the application, it results in a poor user experience—such as a frozen screen until the response arrives.
 
 This is where asynchronous programming comes into play. It allows the code to continue executing normally while the request is processed in the background. Once the request is complete, the result is displayed without interrupting the user experience.
 
+## Multi-Threaded vs Single-Threaded in JavaScript
+
+**Before you continue, you might want to read [Understanding the Event Loop: The Heart of Asynchronous JavaScript](https://dev.to/beatrisilieva/a-beginners-guide-to-http-and-rest-services-3j92).**
+
+In general, multi-threaded means that multiple processes can run simultaneously, with two programs executing in parallel, independently of each other. On the other hand, synchronous code runs sequentially, within a single process.
+
+JS, however, is a single-threaded language, meaning it executes code in one process at a time. But here’s the interesting part: despite being single-threaded, JS allows asynchronous operations. This means that even though JS processes tasks one at a time, it can still handle tasks like network requests, allowing other code to run in the meantime.
+
+So, how can JS be asynchronous if it’s not multi-threaded? The key lies in the event loop mechanism, which lets JS offload tasks to be executed later, without blocking the main thread. This gives the illusion of parallel execution while maintaining a single thread of execution.
+
 ## AJAX
 
-AJAX (Asynchronous JavaScript and XML) is a technique for fetching data from a remote server in the background without disrupting the user experience. It allows web applications to send and receive data asynchronously, meaning the page doesn’t need to reload to update its content.
+AJAX is a technique for fetching data from a remote server in the background without disrupting the user experience. It allows web applications to send and receive data asynchronously, meaning the page doesn’t need to reload to update its content.
 
-With AJAX, JavaScript makes requests to the server, retrieves data, and dynamically updates the webpage without requiring a full refresh. This approach enhances user experience by ensuring smooth interactions, such as loading new content, submitting forms, or fetching search results without interruptions.
+With AJAX, JS instructs the browser to send requests to the server, retrieve data, and dynamically update the webpage without requiring a full refresh. This approach enhances user experience by enabling smooth interactions, such as loading new content, submitting forms, or fetching search results without interruptions.
 
 ### AJAX Workflow
 
 #### Initial Page Load
 
-When a user visits a webpage, the client (browser) makes an HTTP request to the server. This initial request is known as the initial page load. However, it’s not just a single request—multiple requests are sent to fetch essential static files, such as HTML, CSS, JavaScript, fonts, images, and other resources. Once these files are loaded, the web application becomes interactive and starts running on the client side (in the browser).
+When a user visits a webpage, the browser makes an HTTP request to the server to fetch the necessary resources, such as HTML, CSS, JS, images, and fonts. This initial page load involves multiple requests, not just one, as each resource must be fetched separately. Once all these resources are loaded, the web application becomes interactive and starts running in the browser. At this point, the client-side JS is ready to handle dynamic content and further user interactions.
 
 #### User Interaction
 
-Among the loaded files are JavaScript scripts that make the application dynamic and interactive. When a user interacts with the page—such as clicking a button with an event listener attached via the DOM API—an AJAX request is triggered.
+Once the page is loaded, JS is responsible for making the application interactive. When a user triggers an event—such as clicking a button or submitting a form—the application does not reload the entire page. Instead, an AJAX request is initiated to communicate with the server in the background.
 
-This request is sent to a RESTful server in the background, without requiring a full page reload. The server processes the request and responds with data, typically in JSON format. The client then processes this data and updates the page accordingly.
+#### Request to the RESTful Server
 
-##### Steps in the AJAX Workflow
+The AJAX request is sent to the server, which processes the request and sends back a response. Most of the time, the server responds with data in a lightweight format like JSON.
 
-1. Initial page load – The client fetches the necessary resources from the server.
-2. User interaction – A user triggers an event, such as clicking a button.
-3. Request to the RESTful server – The client sends an AJAX request in the background.
-4. Processing and rendering – The client processes the response data and updates the page dynamically.
-5. Updated content appears – The user sees the changes instantly, without any page reload or interruption.
-6. This approach ensures a smooth and responsive user experience by updating only the necessary parts of the webpage instead of reloading the entire page.
+#### Processing and Rendering
+
+After the data is received, the client processes the response and dynamically updates the page as needed. This could involve rendering new content, updating UI elements, or displaying messages to the user. The processing of data happens asynchronously, ensuring the application remains responsive while handling the background request.
 
 ## Synchronous vs Asynchronous Programming
 
-### Synchronous
+### Synchronous Programming
 
-Synchronous code is code that executes sequentially. Each row/command executes one by one (exceptions we have when cycles and conditions). Each command await for the next one to finish before it starts:
+Synchronous programming means that the code is executed line by line, one command after the other. Each operation must complete before the next one can begin. This results in a predictable flow of execution, but it can be inefficient if some operations take a long time to complete (e.g., network requests). Here’s an example of synchronous code:
 
 ```javascript
 console.log(1);
@@ -58,27 +74,17 @@ console.log(2);
 console.log(3);
 ```
 
-### Asynchronous
+In this case, the numbers will be printed one after another in the exact order.
 
-Means that some of the commands might take more time to be executed so mesanwhile the rest are executed. The result from execution of asynchronous code might appear in the future because they take time to be completed. The commands can execute in parallel and the total time of execution will depend on how much time the loger task took.
-JS is asynchronous but not multi-threaded.
+### Asynchronous Programming
+
+Asynchronous programming allows certain tasks, like fetching data from a server, to run in the background while other code continues to execute. This prevents blocking the entire program, keeping the application responsive. In JS, asynchronous code can execute concurrently, meaning the total execution time depends on the longest task, and the program remains functional while waiting for the result.
 
 #### Approaches to asynchronous programming
 
 ##### Callbacks
 
-In the following example we get a button from the DOM tree and attach an event listener on it. Which means that when the click event occurs the function `clickHandler` will be executed. This means that we register an asynchronous opereation. The `clickHandler` function is code that will be executed at a furute point in time in an unkown moment. It is called a callback approach because the function that we pass to the event listener as an argument in order it to be executed in the furure. Each function that we pass to another function as a parametr to be executed in the future is called a calback function.
-
-```javascript
-const button = document.querySelector('button');
-button.addEventListener('click', clickHandler);
-
-function clickHandler(e) {
-    console.log('The button has been clicked');
-}
-```
-
-Let'sa have a look at another example by using the built in function `setTimeout()`. We pass to it as a first parameter a handler -> a callback and as a second the time after which the callback to be executed. `setTimeout()` is a function that allows us to pass to it as an argument a callback function to be executed after certain amount of time. So the callback will be executed asynchronously after a certain amount of time.
+Let's look at an example using the built-in setTimeout() function. This function accepts two arguments: a callback (a function to execute) and a delay (the time after which the callback will be executed). With setTimeout(), the callback is executed asynchronously after the specified time.
 
 ```javascript
 console.log('Before');
@@ -88,9 +94,14 @@ setTimeout(function () {
 console.log('After');
 ```
 
-If the above was a synchronous code we would expect to see first Before, then to wait to seconds to see Meanwhile and lastly After.
+In a synchronous context, we'd expect to see the following:
 
-However the result is that Before and After appear immediatelly and after two seconds appear Meanwhile.
+1. 'Before'
+2. Wait for 2 seconds
+3. 'Meanwhile'
+4. 'After'
+
+However, the actual output is:
 
 ```javascript
 Before;
@@ -98,13 +109,13 @@ After;
 Meanwhile;
 ```
 
-The execution happens in the following order:
+Explanation:
 
-1. console.log('Before');
-2. the function setTimeout delegates the callback to somebody else to execute it after 2 seconds
-3. console.log('After');
+1. console.log('Before') is executed immediately.
+2. setTimeout() delegates the callback function to be executed later (after 2 seconds).
+3. console.log('After') is executed immediately after setTimeout() is called, even before the callback runs.
 
-But what would happen if we set the callback to be executed after 0 seconds?
+Now, what if we set the callback to execute after 0 seconds?
 
 ```javascript
 console.log('Before');
@@ -114,7 +125,7 @@ setTimeout(function () {
 console.log('After');
 ```
 
-The result is still the same:
+The output remains the same:
 
 ```javascript
 Before;
@@ -122,15 +133,11 @@ After;
 Meanwhile;
 ```
 
-The result is still the same namely because synchronous actions ALWAYS execute before asynchronous ones.
+This happens because synchronous actions always execute before asynchronous ones, even if the delay is set to 0. The callback is still placed in the event queue and will only be executed after the current stack is cleared.
 
 ##### Promises
 
-A Promise is a JavaScript object that represents a value that may be available in the future, or never. It is commonly used to handle asynchronous operations, such as fetching data from a server.
-
-###### Why Use Promises
-
-Imagine a user clicks a button to load additional content. Instead of freezing the entire webpage while waiting for the server's response, a Promise allows the code to continue running and updates the UI when the data arrives.
+A Promise is a JS object that represents a value that may be available in the future, or never. It is commonly used to handle asynchronous operations, such as fetching data from a server.
 
 ###### Promise States
 
@@ -206,118 +213,177 @@ Otherwise:
 📡 Monitoring rocket status...
 (Wait 3 seconds...)
 🔥 Mission failed! The rocket exploded in space. 💥
-
-```
-
-###### Promise.all()
-
-Promise.all() runs multiple promises in parallel and:
-
-1. Resolves only when all promises resolve.
-2. Rejects immediately if any promise fails.
-
-```javascript
-const firstMission = launchRocket();
-const secondMission = launchRocket();
-const thirdMission = launchRocket();
-const fourthMission = launchRocket();
-
-Promise.all([
-    firstMission,
-    secondMission,
-    thirdMission,
-    fourthMission
-])
-    .then(result => console.log(result))
-    .catch(err => console.log(err));
-```
-
-What Happens?
-
-1. If all rockets succeed, .then() runs and logs all results.
-2. If any rocket fails, .catch() runs immediately, ignoring other results.
-
-Example Output
-
-✅ All missions succeed (Resolves):
-
-```javascript
-4 🚀 Initiating launch sequence...
-'🎉 The rocket has successfully landed on Mars! 🏆'
-```
-
-❌ At least one mission fails (Rejects):
-
-```javascript
-4 🚀 Initiating launch sequence...
-🔥 Mission failed! The rocket exploded in space. 💥
-```
-
-###### Promise.allSettled()
-
-Unlike Promise.all(), which fails fast if any promise rejects,
-Promise.allSettled() waits for all promises to complete, whether they:
-✔ Fulfill (Success) or
-❌ Reject (Failure).
-
-Example: Monitoring Rocket Launches 🚀
-
-```javascript
-Promise.allSettled([
-    firstMission,
-    secondMission,
-    thirdMission,
-    fourthMission
-])
-    .then(result => console.log(result))
-    .catch(err => console.log(err));
-```
-
-How It Works
-Each promise returns an object with:
-
-1. status: "fulfilled" or "rejected"
-2. value (if successful) or reason (if failed)
-
-Example Output
-
-```javascript
-🚀 Initiating launch sequence...
-🚀 Initiating launch sequence...
-🚀 Initiating launch sequence...
-🚀 Initiating launch sequence...
-[
-  {
-    status: 'fulfilled',
-    value: '🎉 The rocket has successfully landed on Mars! 🏆'
-  },
-  {
-    status: 'fulfilled',
-    value: '🎉 The rocket has successfully landed on Mars! 🏆'
-  },
-  {
-    status: 'rejected',
-    reason: '🔥 Mission failed! The rocket exploded in space. 💥'
-  },
-  {
-    status: 'rejected',
-    reason: '🔥 Mission failed! The rocket exploded in space. 💥'
-  }
-]
 ```
 
 ##### Async/Await
 
-In this article, we will focus on Promises and Async/Await, as they are the standard approaches in modern JavaScript development.
+Async/Await is a more readable way to work with promises in JavaScript. It provides a cleaner and more intuitive syntax compared to using .then() and .catch().
 
-#### Multi-Threaded vs Single-Threaded programming
+1. async functions always return a promise, even if you don't explicitly return one. If a value is returned, it's automatically wrapped in a resolved promise.
+2. The await keyword can only be used inside async functions. It pauses the execution of the function at that point until the promise resolves or rejects.
+3. While the code inside an async function looks synchronous, it is non-blocking and will not freeze the rest of the program. It still allows asynchronous operations to run, but the function execution itself pauses at each await until the promise is settled.
 
-Multi-Threaded means that multiple processes happen at one and the same time. Two programs execute in parallel independantly from each other. Synchronous code happens into one process. JS is a Single-Threaded language but it allows asynchronous operations. In JS the code executes in only one process. How is it possible that Js is not Multi-Threaded but it is asynchronous language?
+```javascript
+function launchRocket() {
+    return new Promise((resolve, reject) => {
+        console.log('🚀 Initiating launch sequence...');
 
-## Event Loop
+        setTimeout(() => {
+            if (Math.random() < 0.5) {
+                resolve(
+                    '🎉 The rocket has successfully landed on Mars! 🏆'
+                );
+            } else {
+                reject(
+                    '🔥 Mission failed! The rocket exploded in space. 💥'
+                );
+            }
+        }, 3000);
+    });
+}
 
-### Execution stack
+async function startMission() {
+    try {
+        const result = await launchRocket();
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
 
-A stack is a data structure in which the last entered item would be the first to go out.
-Dedicated memory for the runtime execution of our program.
-In the callstack are the execution contexts of our functions.
+startMission();
+```
+
+###### Key Points:
+
+1. async keyword: Declares a function as asynchronous, which will always return a promise.
+2. await keyword: Pauses the execution of the function until the promise resolves or rejects.
+3. Synchronous-looking code: Inside an async function, code looks like it's executing synchronously, but it still works asynchronously behind the scenes.
+4. Error handling: Use try/catch to handle errors with async/await, just like synchronous code.
+
+## Fetch API
+
+The Fetch API is a way to make HTTP requests in JavaScript, and it’s built on Promises.
+
+1. Promise: fetch() returns a promise that resolves to the response of the request.
+2. Response: The response from a fetch() request is a Stream, which means it’s processed asynchronously.
+3. Default Method: By default, fetch() uses the GET method, so we don’t need to specify it unless we're making a request with another HTTP method (like POST or PUT).
+4. Options Parameter: When sending a request with a body (e.g., POST or PUT), we need to pass an options object where we specify the method, headers, and body.
+5. Body and Headers: When sending data in the body of a request, it should be a JSON string. We must also include headers to tell the server that we're sending JSON data (e.g., 'Content-Type': 'application/json').
+
+### GET Request
+
+A GET request is used to retrieve data from a server.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts/1') // returns a promise
+    .then(response => response.json()) // returns a promise
+    .then(result => console.log(result))
+    .catch(error => console.log(error.message)); // handle errors
+```
+
+Result:
+
+```javascript
+{
+  userId: 1,
+  id: 1,
+  title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+  body: 'quia et suscipit\n' +
+    'suscipit recusandae consequuntur expedita et cum\n' +
+    'reprehenderit molestiae ut ut quas totam\n' +
+    'nostrum rerum est autem sunt rem eveniet architecto'
+}
+```
+
+### POST REQUEST
+
+A POST request is used to send data to the server, such as creating a new resource.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        title: 'My First Post',
+        body: 'This is a test post.',
+        userId: 1
+    })
+})
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('Error:', error));
+```
+
+Result:
+
+```javascript
+{
+  title: 'My First Post',
+  body: 'This is a test post.',
+  userId: 1,
+  id: 101
+}
+```
+
+### PUT Request
+
+A PUT request is used to update an existing resource on the server.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        id: 1,
+        title: 'Updated title',
+        body: 'Updated content',
+        userId: 1
+    })
+})
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('Error:', error));
+```
+
+Result
+
+```javascript
+{ id: 1, title: 'Updated title', body: 'Updated content', userId: 1 }
+```
+
+#### DELETE Request
+
+A DELETE request is used to delete a resource from the server.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    method: 'DELETE'
+})
+    .then(response => console.log('Deleted:', response.ok))
+    .catch(error => console.error('Error:', error));
+```
+
+Result:
+
+```javascript
+Deleted: true;
+```
+
+By using the Fetch API, we can perform asynchronous operations like retrieving and sending data to a server without blocking the rest of our code.
+
+## Summary
+
+In this guide, we've explored the key concepts and techniques involved in asynchronous programming in JS.
+
+1. Asynchronous Programming allows us to perform tasks like network requests without blocking the rest of our code, which improves user experience by keeping applications responsive.
+2. JS is single-threaded, yet through asynchronous operations and the event loop, it can handle tasks concurrently.
+3. AJAX is a set of techniques that allows JS to instruct the browser to fetch data from the server in the background and update the UI dynamically, without reloading the page, ensuring smooth interactions.
+4. Synchronous vs Asynchronous programming contrasts how tasks are executed: synchronously (sequentially) and asynchronously (non-blocking).
+5. Promises are a foundational concept in handling asynchronous operations, offering methods like .then() and .catch() to manage success and error cases.
+6. Async/Await provides a cleaner and more intuitive syntax for working with Promises, making asynchronous code look and behave more synchronously.
+7. Fetch API allows us to make HTTP requests, such as GET, POST, PUT, and DELETE, leveraging Promises to handle responses asynchronously.
