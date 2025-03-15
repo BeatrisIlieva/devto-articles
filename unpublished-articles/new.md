@@ -258,3 +258,113 @@ startMission();
 2. await keyword: Pauses the execution of the function until the promise resolves or rejects.
 3. Synchronous-looking code: Inside an async function, code looks like it's executing synchronously, but it still works asynchronously behind the scenes.
 4. Error handling: Use try/catch to handle errors with async/await, just like synchronous code.
+
+## Fetch API
+
+FETCH API - provided by the Browser
+It is based on Promises
+
+The response of a fetch() request is a Stream
+
+fetch() returns a promise for the response
+
+promise chaining
+
+when we sent a body we need to pass a parameter called 'options'; in it we need to specify the method.
+BY DEFAULT the method is GET that's why we do not specify it in a GET request.
+we need to specify the body and send it as JSON STRING.
+we also need to say to the server of what type is the data sent in the body; this we specify in the headers.
+
+### GET Request
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts/1') // returns a promise
+    .then(response => response.json()) // returns a promise
+    .then(result => console.log(result))
+    .catch(error => console.log(error.message)); // catch handles both then's
+```
+
+Result:
+
+```javascript
+{
+  userId: 1,
+  id: 1,
+  title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+  body: 'quia et suscipit\n' +
+    'suscipit recusandae consequuntur expedita et cum\n' +
+    'reprehenderit molestiae ut ut quas totam\n' +
+    'nostrum rerum est autem sunt rem eveniet architecto'
+}
+```
+
+### POST REQUEST
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        title: 'My First Post',
+        body: 'This is a test post.',
+        userId: 1
+    })
+})
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('Error:', error));
+```
+
+result:
+
+```javascript
+{
+  title: 'My First Post',
+  body: 'This is a test post.',
+  userId: 1,
+  id: 101
+}
+```
+
+### PUT Request
+
+```javascript
+// PUT REQUEST
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        id: 1,
+        title: 'Updated title',
+        body: 'Updated content',
+        userId: 1
+    })
+})
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('Error:', error));
+```
+
+result:
+
+```javascript
+{ id: 1, title: 'Updated title', body: 'Updated content', userId: 1 }
+```
+
+#### DELETE Request
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    method: 'DELETE'
+})
+    .then(response => console.log('Deleted:', response.ok))
+    .catch(error => console.error('Error:', error));
+```
+
+```javascript
+Deleted: true;
+```
