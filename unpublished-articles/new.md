@@ -10,6 +10,7 @@ published: true
 2. [Multi-Threaded vs Single-Threaded in JavaScript](#multi-threaded-vs-single-threaded-in-javascript)
 3. [AJAX](#ajax)
 4. [Synchronous vs Asynchronous Programming](#synchronous-vs-asynchronous-programming)
+5. [Fetch API](#fetch-api)
 
 ## Abbreviations
 
@@ -261,27 +262,23 @@ startMission();
 
 ## Fetch API
 
-FETCH API - provided by the Browser
-It is based on Promises
+The Fetch API is a way to make HTTP requests in JavaScript, and it’s built on Promises.
 
-The response of a fetch() request is a Stream
-
-fetch() returns a promise for the response
-
-promise chaining
-
-when we sent a body we need to pass a parameter called 'options'; in it we need to specify the method.
-BY DEFAULT the method is GET that's why we do not specify it in a GET request.
-we need to specify the body and send it as JSON STRING.
-we also need to say to the server of what type is the data sent in the body; this we specify in the headers.
+1. Promise: fetch() returns a promise that resolves to the response of the request.
+2. Response: The response from a fetch() request is a Stream, which means it’s processed asynchronously.
+3. Default Method: By default, fetch() uses the GET method, so we don’t need to specify it unless we're making a request with another HTTP method (like POST or PUT).
+4. Options Parameter: When sending a request with a body (e.g., POST or PUT), we need to pass an options object where we specify the method, headers, and body.
+5. Body and Headers: When sending data in the body of a request, it should be a JSON string. We must also include headers to tell the server that we're sending JSON data (e.g., 'Content-Type': 'application/json').
 
 ### GET Request
+
+A GET request is used to retrieve data from a server.
 
 ```javascript
 fetch('https://jsonplaceholder.typicode.com/posts/1') // returns a promise
     .then(response => response.json()) // returns a promise
     .then(result => console.log(result))
-    .catch(error => console.log(error.message)); // catch handles both then's
+    .catch(error => console.log(error.message)); // handle errors
 ```
 
 Result:
@@ -300,6 +297,8 @@ Result:
 
 ### POST REQUEST
 
+A POST request is used to send data to the server, such as creating a new resource.
+
 ```javascript
 fetch('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
@@ -317,7 +316,7 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
     .catch(error => console.log('Error:', error));
 ```
 
-result:
+Result:
 
 ```javascript
 {
@@ -330,8 +329,9 @@ result:
 
 ### PUT Request
 
+A PUT request is used to update an existing resource on the server.
+
 ```javascript
-// PUT REQUEST
 fetch('https://jsonplaceholder.typicode.com/posts/1', {
     method: 'PUT',
     headers: {
@@ -349,13 +349,15 @@ fetch('https://jsonplaceholder.typicode.com/posts/1', {
     .catch(error => console.log('Error:', error));
 ```
 
-result:
+Result
 
 ```javascript
 { id: 1, title: 'Updated title', body: 'Updated content', userId: 1 }
 ```
 
 #### DELETE Request
+
+A DELETE request is used to delete a resource from the server.
 
 ```javascript
 fetch('https://jsonplaceholder.typicode.com/posts/1', {
@@ -365,6 +367,10 @@ fetch('https://jsonplaceholder.typicode.com/posts/1', {
     .catch(error => console.error('Error:', error));
 ```
 
+Result:
+
 ```javascript
 Deleted: true;
 ```
+
+By using the Fetch API, we can perform asynchronous operations like retrieving and sending data to a server without blocking the rest of our code.
