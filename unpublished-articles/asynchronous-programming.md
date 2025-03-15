@@ -209,7 +209,7 @@ Otherwise:
 
 ```
 
-###### Promise.all() – Waiting for Multiple Promises
+###### Promise.all()
 
 Promise.all() runs multiple promises in parallel and:
 
@@ -251,6 +251,59 @@ Example Output
 ```javascript
 4 🚀 Initiating launch sequence...
 🔥 Mission failed! The rocket exploded in space. 💥
+```
+
+###### Promise.allSettled()
+
+Unlike Promise.all(), which fails fast if any promise rejects,
+Promise.allSettled() waits for all promises to complete, whether they:
+✔ Fulfill (Success) or
+❌ Reject (Failure).
+
+Example: Monitoring Rocket Launches 🚀
+
+```javascript
+Promise.allSettled([
+    firstMission,
+    secondMission,
+    thirdMission,
+    fourthMission
+])
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
+```
+
+How It Works
+Each promise returns an object with:
+
+1. status: "fulfilled" or "rejected"
+2. value (if successful) or reason (if failed)
+
+Example Output
+
+```javascript
+🚀 Initiating launch sequence...
+🚀 Initiating launch sequence...
+🚀 Initiating launch sequence...
+🚀 Initiating launch sequence...
+[
+  {
+    status: 'fulfilled',
+    value: '🎉 The rocket has successfully landed on Mars! 🏆'
+  },
+  {
+    status: 'fulfilled',
+    value: '🎉 The rocket has successfully landed on Mars! 🏆'
+  },
+  {
+    status: 'rejected',
+    reason: '🔥 Mission failed! The rocket exploded in space. 💥'
+  },
+  {
+    status: 'rejected',
+    reason: '🔥 Mission failed! The rocket exploded in space. 💥'
+  }
+]
 ```
 
 ##### Async/Await
