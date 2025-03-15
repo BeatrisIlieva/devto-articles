@@ -11,6 +11,7 @@ published: true
 3. [AJAX](#ajax)
 4. [Synchronous vs Asynchronous Programming](#synchronous-vs-asynchronous-programming)
 5. [Fetch API](#fetch-api)
+6. [Summary](#summary)
 
 ## Abbreviations
 
@@ -41,13 +42,13 @@ So, how can JS be asynchronous if it’s not multi-threaded? The key lies in the
 
 AJAX is a technique for fetching data from a remote server in the background without disrupting the user experience. It allows web applications to send and receive data asynchronously, meaning the page doesn’t need to reload to update its content.
 
-With AJAX, JS makes requests to the server, retrieves data, and dynamically updates the webpage without requiring a full refresh. This approach enhances user experience by ensuring smooth interactions, such as loading new content, submitting forms, or fetching search results without interruptions.
+With AJAX, JS instructs the browser to send requests to the server, retrieve data, and dynamically update the webpage without requiring a full refresh. This approach enhances user experience by enabling smooth interactions, such as loading new content, submitting forms, or fetching search results without interruptions.
 
 ### AJAX Workflow
 
 #### Initial Page Load
 
-When a user visits a webpage, the browser makes an HTTP request to the server to fetch the necessary resources, such as HTML, CSS, JavaScript, images, and fonts. This initial page load involves multiple requests, not just one, as each resource must be fetched separately. Once all these resources are loaded, the web application becomes interactive and starts running in the browser. At this point, the client-side JS is ready to handle dynamic content and further user interactions.
+When a user visits a webpage, the browser makes an HTTP request to the server to fetch the necessary resources, such as HTML, CSS, JS, images, and fonts. This initial page load involves multiple requests, not just one, as each resource must be fetched separately. Once all these resources are loaded, the web application becomes interactive and starts running in the browser. At this point, the client-side JS is ready to handle dynamic content and further user interactions.
 
 #### User Interaction
 
@@ -77,7 +78,7 @@ In this case, the numbers will be printed one after another in the exact order.
 
 ### Asynchronous Programming
 
-Asynchronous programming allows certain tasks, like fetching data from a server, to run in the background while other code continues to execute. This prevents blocking the entire program, keeping the application responsive. In JavaScript, asynchronous code can execute concurrently, meaning the total execution time depends on the longest task, and the program remains functional while waiting for the result.
+Asynchronous programming allows certain tasks, like fetching data from a server, to run in the background while other code continues to execute. This prevents blocking the entire program, keeping the application responsive. In JS, asynchronous code can execute concurrently, meaning the total execution time depends on the longest task, and the program remains functional while waiting for the result.
 
 #### Approaches to asynchronous programming
 
@@ -374,3 +375,15 @@ Deleted: true;
 ```
 
 By using the Fetch API, we can perform asynchronous operations like retrieving and sending data to a server without blocking the rest of our code.
+
+## Summary
+
+In this guide, we've explored the key concepts and techniques involved in asynchronous programming in JS.
+
+1. Asynchronous Programming allows us to perform tasks like network requests without blocking the rest of our code, which improves user experience by keeping applications responsive.
+2. JS is single-threaded, yet through asynchronous operations and the event loop, it can handle tasks concurrently.
+3. AJAX is a set of techniques that allows JS to instruct the browser to fetch data from the server in the background and update the UI dynamically, without reloading the page, ensuring smooth interactions.
+4. Synchronous vs Asynchronous programming contrasts how tasks are executed: synchronously (sequentially) and asynchronously (non-blocking).
+5. Promises are a foundational concept in handling asynchronous operations, offering methods like .then() and .catch() to manage success and error cases.
+6. Async/Await provides a cleaner and more intuitive syntax for working with Promises, making asynchronous code look and behave more synchronously.
+7. Fetch API allows us to make HTTP requests, such as GET, POST, PUT, and DELETE, leveraging Promises to handle responses asynchronously.
