@@ -6,9 +6,10 @@ published: true
 
 ## 📋 Table of Contents
 
--   [Introduction](#introduction)
--   [Multi-Threaded vs Single-Threaded in JavaScript](#multi-threaded-vs-single-threaded-in-javascript)
--   [AJAX](#ajax)
+1. [Introduction](#introduction)
+2. [Multi-Threaded vs Single-Threaded in JavaScript](#multi-threaded-vs-single-threaded-in-javascript)
+3. [AJAX](#ajax)
+4. [Synchronous vs Asynchronous Programming](#synchronous-vs-asynchronous-programming)
 
 ## Abbreviations
 
@@ -43,14 +44,36 @@ With AJAX, JS makes requests to the server, retrieves data, and dynamically upda
 
 ### AJAX Workflow
 
-1. Initial Page Load
-   When a user visits a webpage, the browser makes an HTTP request to the server to fetch the necessary resources, such as HTML, CSS, JavaScript, images, and fonts. This initial page load involves multiple requests, not just one, as each resource must be fetched separately. Once all these resources are loaded, the web application becomes interactive and starts running in the browser. At this point, the client-side JS is ready to handle dynamic content and further user interactions.
+#### Initial Page Load
 
-2. User Interaction
-   Once the page is loaded, JS is responsible for making the application interactive. When a user triggers an event—such as clicking a button or submitting a form—the application does not reload the entire page. Instead, an AJAX request is initiated to communicate with the server in the background.
+When a user visits a webpage, the browser makes an HTTP request to the server to fetch the necessary resources, such as HTML, CSS, JavaScript, images, and fonts. This initial page load involves multiple requests, not just one, as each resource must be fetched separately. Once all these resources are loaded, the web application becomes interactive and starts running in the browser. At this point, the client-side JS is ready to handle dynamic content and further user interactions.
 
-3. Request to the RESTful Server
-   The AJAX request is sent to the server, which processes the request and sends back a response. Most of the time, the server responds with data in a lightweight format like JSON.
+#### User Interaction
 
-4. Processing and Rendering
-   After the data is received, the client processes the response and dynamically updates the page as needed. This could involve rendering new content, updating UI elements, or displaying messages to the user. The processing of data happens asynchronously, ensuring the application remains responsive while handling the background request.
+Once the page is loaded, JS is responsible for making the application interactive. When a user triggers an event—such as clicking a button or submitting a form—the application does not reload the entire page. Instead, an AJAX request is initiated to communicate with the server in the background.
+
+#### Request to the RESTful Server
+
+The AJAX request is sent to the server, which processes the request and sends back a response. Most of the time, the server responds with data in a lightweight format like JSON.
+
+#### Processing and Rendering
+
+After the data is received, the client processes the response and dynamically updates the page as needed. This could involve rendering new content, updating UI elements, or displaying messages to the user. The processing of data happens asynchronously, ensuring the application remains responsive while handling the background request.
+
+## Synchronous vs Asynchronous Programming
+
+### Synchronous Programming
+
+Synchronous programming means that the code is executed line by line, one command after the other. Each operation must complete before the next one can begin. This results in a predictable flow of execution, but it can be inefficient if some operations take a long time to complete (e.g., network requests). Here’s an example of synchronous code:
+
+```javascript
+console.log(1);
+console.log(2);
+console.log(3);
+```
+
+In this case, the numbers will be printed one after another in the exact order.
+
+### Asynchronous Programming
+
+Asynchronous programming allows certain tasks, like fetching data from a server, to run in the background while other code continues to execute. This prevents blocking the entire program, keeping the application responsive. In JavaScript, asynchronous code can execute concurrently, meaning the total execution time depends on the longest task, and the program remains functional while waiting for the result.
