@@ -80,7 +80,7 @@ Asynchronous programming allows certain tasks, like fetching data from a server,
 
 #### Approaches to asynchronous programming
 
-#### Callbacks
+##### Callbacks
 
 Let's look at an example using the built-in setTimeout() function. This function accepts two arguments: a callback (a function to execute) and a delay (the time after which the callback will be executed). With setTimeout(), the callback is executed asynchronously after the specified time.
 
@@ -132,3 +132,129 @@ Meanwhile;
 ```
 
 This happens because synchronous actions always execute before asynchronous ones, even if the delay is set to 0. The callback is still placed in the event queue and will only be executed after the current stack is cleared.
+
+##### Promises
+
+A Promise is a JS object that represents a value that may be available in the future, or never. It is commonly used to handle asynchronous operations, such as fetching data from a server.
+
+###### Promise States
+
+A Promise can be in one of three states:
+
+1. Pending → The operation is still in progress.
+2. Fulfilled → The operation was successful, and we have the result.
+3. Rejected → An error occurred, and the operation failed.
+
+###### Creating a Promise
+
+To create a Promise, we use the Promise class and provide an executor function. This function takes two parameters:
+
+1. resolve(value) → Called when the operation succeeds.
+2. reject(reason) → Called when the operation fails.
+
+Here’s an example simulating a rocket launch mission 🚀:
+
+```javascript
+function launchRocket() {
+    return new Promise((resolve, reject) => {
+        console.log('🚀 Initiating launch sequence...');
+
+        setTimeout(() => {
+            if (Math.random() < 0.5) {
+                resolve(
+                    '🎉 The rocket has successfully landed on Mars! 🏆'
+                );
+            } else {
+                reject(
+                    '🔥 Mission failed! The rocket exploded in space. 💥'
+                );
+            }
+        }, 3000); // Simulating a 3-second delay
+    });
+}
+```
+
+###### Using a Promise
+
+Once we have a Promise, we handle its outcome using:
+
+1. .then(successCallback) → Executes when the Promise is fulfilled.
+2. .catch(errorCallback) → Executes when the Promise is rejected.
+
+```javascript
+const mission = launchRocket();
+
+mission
+    .then(result => {
+        console.log(result); // Runs if the mission succeeds
+    })
+    .catch(error => {
+        console.log(error); // Runs if the mission fails
+    });
+
+console.log('📡 Monitoring rocket status...'); // This runs immediately (non-blocking)
+```
+
+If success:
+
+```javascript
+🚀 Initiating launch sequence...
+📡 Monitoring rocket status...
+(Wait 3 seconds...)
+🎉 The rocket has successfully landed on Mars! 🏆
+```
+
+Otherwise:
+
+```javascript
+🚀 Initiating launch sequence...
+📡 Monitoring rocket status...
+(Wait 3 seconds...)
+🔥 Mission failed! The rocket exploded in space. 💥
+```
+
+##### Async/Await
+
+Async/Await is a more readable way to work with promises in JavaScript. It provides a cleaner and more intuitive syntax compared to using .then() and .catch().
+
+1. async functions always return a promise, even if you don't explicitly return one. If a value is returned, it's automatically wrapped in a resolved promise.
+2. The await keyword can only be used inside async functions. It pauses the execution of the function at that point until the promise resolves or rejects.
+3. While the code inside an async function looks synchronous, it is non-blocking and will not freeze the rest of the program. It still allows asynchronous operations to run, but the function execution itself pauses at each await until the promise is settled.
+
+```javascript
+function launchRocket() {
+    return new Promise((resolve, reject) => {
+        console.log('🚀 Initiating launch sequence...');
+
+        setTimeout(() => {
+            if (Math.random() < 0.5) {
+                resolve(
+                    '🎉 The rocket has successfully landed on Mars! 🏆'
+                );
+            } else {
+                reject(
+                    '🔥 Mission failed! The rocket exploded in space. 💥'
+                );
+            }
+        }, 3000);
+    });
+}
+
+async function startMission() {
+    try {
+        const result = await launchRocket();
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+startMission();
+```
+
+###### Key Points:
+
+1. async keyword: Declares a function as asynchronous, which will always return a promise.
+2. await keyword: Pauses the execution of the function until the promise resolves or rejects.
+3. Synchronous-looking code: Inside an async function, code looks like it's executing synchronously, but it still works asynchronously behind the scenes.
+4. Error handling: Use try/catch to handle errors with async/await, just like synchronous code.
