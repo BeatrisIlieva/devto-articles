@@ -52,7 +52,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Image Alt Text](https://raw.githubusercontent.com/BeatrisIlieva/devto-articles/main/event-loop-images/3.png)
 
-📩 Since the delay is 0ms, the _Browser API_ processes the request immediately and moves the `zeroSecondsLater callback` to the _Event Queue_
+📩 Since the delay is 0ms, the _Browser API_ processes the request immediately and moves the `zeroSecondsLater callback` to the _Event Queue_.
 
 ![Image Alt Text](https://raw.githubusercontent.com/BeatrisIlieva/devto-articles/main/event-loop-images/4.png)
 
