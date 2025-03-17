@@ -1,6 +1,6 @@
 ---
 title: 'Event Loop: The Heart of Asynchronous JavaScript'
-tags: ['JavaScript', 'Event-Loop']
+tags: ['JavaScript', 'Event Loop']
 published: true
 ---
 
