@@ -102,24 +102,24 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](/event-loop-images/18.png)
 
-🚀 The function executes, producing "3 seconds later" in the console.
+🚀 The function executes, producing `"3 seconds later"` in the console.
 
 ![Alt text](/event-loop-images/19.png)
 
-👀 Again, the call stack is empty, allowing the event loop to move console.log('4 seconds later'); from the event queue to the call stack.
+👀 Again, the _Call Stack_ is empty, allowing the _Event Loop_ to move `console.log('4 seconds later');` from the _Event Queue_ to the _Call Stack_.
 
 ![Alt text](/event-loop-images/20.png)
 
-🚀 The function executes, producing "4 seconds later" in the console.
+🚀 The function executes, producing `"4 seconds later"` in the console.
 
 ![Alt text](/event-loop-images/21.png)
 
 ## Key Takeaways
 
-✅ Only synchronous code is executed in the call stack (Execution Stack) on the main thread. The event loop does not move callbacks from the event queue to the call stack until all synchronous code has finished executing.
+✅ **Only synchronous code is executed in the Call Stack** (Execution Stack) on the **main thread**. The _Event Loop_ does not move callbacks from the _Event Queue_ to the _Call Stack_ until all synchronous code has finished executing.
 
-✅ Asynchronous functions (e.g., setTimeout) are delegated to the Browser API, which processes them in parallel while synchronous code continues.
+✅ Asynchronous functions (e.g., setTimeout) are **delegated** to the _Browser API_, which processes them in **parallel** while synchronous code continues.
 
-✅ Callbacks enter the event queue based on when they were processed by the browser, not necessarily in the order they were requested.
+✅ Callbacks enter the _Event Queue_ based on when they were **processed** by the _Browser API_, not necessarily in the order they were requested.
 
-✅ The event loop waits for the call stack to be empty before moving a callback from the event queue to the call stack.
+✅ The _Event Loop_ waits for the _Call Stack_ to be **empty** before moving a callback from the _Event Queue_ to the _Call Stack_.
