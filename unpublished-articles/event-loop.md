@@ -24,9 +24,9 @@ To help visualize this process, we provide a **series of visualizations** that i
 
 In this article, we’ll also briefly touch on the two main data structures that help JavaScript manage synchronous and asynchronous tasks:
 
-🍽️🍽️🍽️ Call Stack: The Call Stack is where JavaScript keeps track of synchronous functions that are executing. It works like a stack of plates — when a function is called, it’s added on top of the stack. When the function finishes, it’s removed from the top of the stack.
+🍽️🍽️🍽️ **Call Stack**: The _Call Stack_ is where JavaScript keeps track of **synchronous** functions that are executing. It works like a stack of plates in the kitchen sink — as each plate gets added, it’s placed on top of the stack. When the sink gets full, the plate that is **added last is the first to be removed**. Similarly, when a function is called, it’s added on top of the stack, and once it finishes executing, it’s removed from the top.
 
-☕🚶‍♂️🚶‍♀️ Event Queue: The Event Queue holds asynchronous tasks waiting to be processed. It works like a line at a coffee shop. The first person in line is the first to get coffee, meaning the first task in the queue will be the first one to be processed once the Call Stack is clear
+☕🚶‍♂️🚶‍♀️ **Event Queue**: The _Event Queue_ holds **asynchronous** tasks waiting to be processed. It works like a line at a coffee shop. The first person in line is the first to get coffee, meaning the **first task added in the queue will be the first one to be processed** once the _Call Stack_ is clear.
 
 ## Step-by-Step Explanation of the JavaScript Event Loop Execution
 
