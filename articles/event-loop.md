@@ -130,7 +130,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ## Key Takeaways
 
-✅ **Only synchronous code is executed in the Call Stack** (Execution Stack) on the **main thread**. The _Event Loop_ does not move callbacks from the _Event Queue_ to the _Call Stack_ until all synchronous code has finished executing.
+✅ **Only synchronous code is executed in the Call Stack** (Execution Stack) on the **main thread**. The _Event Loop_ does not move callbacks from the _Event Queue_ to the _Call Stack_ until all synchronous code has finished executing
 
 ✅ Asynchronous functions (e.g., setTimeout) are **delegated** to the _Browser API_, which processes them in **parallel** while synchronous code continues.
 
