@@ -1,6 +1,6 @@
 ---
 title: 'Asynchronous Programming in JavaScript: A Beginner’s Guide'
-tags: ['Asynchronous Programming', 'AJAX', 'Promises', ' Async/Await']
+tags: ['Asynchronous Programming', 'AJAX', 'Promises']
 published: true
 ---
 
