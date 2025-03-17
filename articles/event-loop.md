@@ -52,7 +52,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](event-loop-images/3.png)
 
-📩 Since the delay is 0ms, the _Browser API_ processes the request immediately and moves the `zeroSecondsLater callback` to the _Event Queue_.
+📩 Since the delay is 0ms, the _Browser API_ processes the request immediately and moves the `zeroSecondsLater callback` to the _Event Queue_
 
 ![Alt text](event-loop-images/4.png)
 
