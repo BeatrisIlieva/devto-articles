@@ -18,11 +18,19 @@ The Event Loop allows JavaScript to perform asynchronous operations, such as wai
 
 In this article, we’ll take a closer look at how the Event Loop manages both **synchronous** and **asynchronous** tasks. We’ll walk through how JavaScript handles operations, manages callbacks, and uses the Event Loop to ensure that asynchronous tasks don't block the execution of synchronous code.
 
-To help visualize this process, we provide a series of visualizations that illustrate each step of how JavaScript handles tasks. These visualizations are based on a specific code example, which is shown throughout the images to simplify the explanation. Each visualization is accompanied by a description to clarify what's happening at each step. This approach helps us see how tasks move through the **Call Stack**, the **Event Queue**, and how the **Event Loop** orchestrates everything.
+To help visualize this process, we provide a **series of visualizations** that illustrate each step of how JavaScript handles tasks. These visualizations are based on a specific code example, which is shown throughout the images to simplify the explanation. Each visualization is accompanied by a **description** to clarify what's happening at each step. This approach helps us see how tasks move through the **Call Stack**, the **Event Queue**, and how the **Event Loop** orchestrates everything.
+
+## Data Structures: Call Stack and Event Queue
+
+In this article, we’ll also briefly touch on the two main data structures that help JavaScript manage synchronous and asynchronous tasks:
+
+🍽️🍽️🍽️ Call Stack: The Call Stack is where JavaScript keeps track of synchronous functions that are executing. It works like a stack of plates — when a function is called, it’s added on top of the stack. When the function finishes, it’s removed from the top of the stack.
+
+☕🚶‍♂️🚶‍♀️ Event Queue: The Event Queue holds asynchronous tasks waiting to be processed. It works like a line at a coffee shop. The first person in line is the first to get coffee, meaning the first task in the queue will be the first one to be processed once the Call Stack is clear
 
 ## Step-by-Step Explanation of the JavaScript Event Loop Execution
 
-For better visualization, all synchronous execution contexts are pushed onto the call stack, ready to be executed. The Execution Stack (Call Stack) is where synchronous code runs on the main thread.
+For better visualization, all synchronous execution contexts are pushed onto the call stack, ready to be executed.
 
 ![Alt text](/event-loop-images/1.png)
 
@@ -50,7 +58,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ⏩ Meanwhile, **synchronous code continues executing in the main thread without waiting for these timers**.
 
-🛑 Important: The **Call Stack executes only synchronous functions** and must complete all synchronous tasks before handling anything else. The _Event Loop_ does not move callbacks from the event queue to the call stack until all synchronous code has finished executing.
+🛑 Important: The **Call Stack executes only synchronous functions** and must complete all synchronous tasks before handling anything else. The _Event Loop_ does not move callbacks from the _Event Queue_ to the _Call Stack_ until all synchronous code has finished executing.
 
 ![Alt text](/event-loop-images/7.png)
 
@@ -70,7 +78,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](/event-loop-images/10.png)
 
-📩 Similarly, after 4 seconds, the _Browser API_ moves `console.log('4 seconds later');` to the _Event Queue_, placing it after the `console.log('3 seconds later');` callback.
+📩 One more second has passed so the _Browser API_ moves `console.log('4 seconds later');` to the _Event Queue_, placing it after the `console.log('3 seconds later');` callback.
 
 ![Alt text](/event-loop-images/11.png)
 
