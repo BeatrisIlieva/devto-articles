@@ -60,4 +60,46 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 📩 Similarly, after 4 seconds, the Browser API moves console.log('4 seconds later'); to the event queue, placing it after the "3 seconds later" callback.
 
+🛑 Important: The event loop does not move callbacks to the call stack until all synchronous code has finished executing.
+
 ![Alt text](/event-loop-images/11.png)
+
+🔄 The zeroSecondsLater(); callback invokes oneSecondLater();
+
+![Alt text](/event-loop-images/12.png)
+
+🔄 oneSecondLater(); invokes console.log.
+
+![Alt text](/event-loop-images/13.png)
+
+💬 "1 second later" is printed in the console.
+
+![Alt text](/event-loop-images/14.png)
+
+🔄 Then, zeroSecondsLater(); invokes twoSecondsLater();.
+
+![Alt text](/event-loop-images/15.png)
+
+🔄 twoSecondsLater(); invokes console.log.
+
+![Alt text](/event-loop-images/16.png)
+
+💬 "2 seconds later" is printed in the console.
+
+![Alt text](/event-loop-images/17.png)
+
+👀 The call stack is now empty, so the event loop moves console.log('3 seconds later'); from the event queue to the call stack.
+
+![Alt text](/event-loop-images/18.png)
+
+🚀 The function executes, producing "3 seconds later" in the console.
+
+![Alt text](/event-loop-images/19.png)
+
+👀 Again, the call stack is empty, allowing the event loop to move console.log('4 seconds later'); from the event queue to the call stack.
+
+![Alt text](/event-loop-images/20.png)
+
+🚀 The function executes, producing "4 seconds later" in the console.
+
+![Alt text](/event-loop-images/21.png)
