@@ -30,7 +30,7 @@ This is where asynchronous programming comes into play. It allows the code to co
 
 ## Multi-Threaded vs Single-Threaded in JavaScript
 
-**Before you continue, you might want to read [Understanding the Event Loop: The Heart of Asynchronous JavaScript](https://dev.to/beatrisilieva/a-beginners-guide-to-http-and-rest-services-3j92).**
+**Before you continue, you might want to read [Understanding the Event Loop: The Heart of Asynchronous JavaScript](https://dev.to/beatrisilieva/understanding-the-event-loop-the-heart-of-asynchronous-javascript-3g0i).**
 
 In general, multi-threaded means that multiple processes can run simultaneously, with two programs executing in parallel, independently of each other. On the other hand, synchronous code runs sequentially, within a single process.
 
