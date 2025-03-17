@@ -254,7 +254,7 @@ async function startMission() {
 startMission();
 ```
 
-###### Key Points:
+###### Key Points
 
 1. async keyword: Declares a function as asynchronous, which will always return a promise.
 2. await keyword: Pauses the execution of the function until the promise resolves or rejects.
