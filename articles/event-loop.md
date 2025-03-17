@@ -11,7 +11,7 @@ published: true
 3. [Data Structures: Call Stack and Event Queue](#data-structures-call-stack-and-event-queue)
 4. [Key Takeaways](#key-takeaways)
 
-🔗 **Live Demo**: https://beatrisilieva.github.io/event-loop
+🔗 **Live Demo**: [Click Here](https://beatrisilieva.github.io/event-loop)
 
 🎥 **Demo Video**:
 [![Watch the video](https://img.youtube.com/vi/LX0Mky7DvFc/maxresdefault.jpg)](https://www.youtube.com/watch?v=LX0Mky7DvFc)
