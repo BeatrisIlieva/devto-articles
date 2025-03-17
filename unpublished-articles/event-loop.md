@@ -12,13 +12,13 @@ published: true
 
 ## Introduction
 
-JavaScript is a single-threaded language, meaning it can only execute one task at a time on the main thread. However, this doesn't mean JavaScript can't handle multiple tasks simultaneously. The key to understanding this behavior lies in the Event Loop.
+JavaScript is a **single-threaded** language, meaning it can only execute one task at a time on the main thread. However, this doesn't mean JavaScript can't handle multiple tasks simultaneously. The key to understanding this behavior lies in the **Event Loop**.
 
 The Event Loop allows JavaScript to perform asynchronous operations, such as waiting for a network request or timer, without blocking the main thread. By offloading tasks to be executed later, JavaScript creates the illusion of parallel execution while still maintaining its single-threaded nature.
 
-In this article, we’ll take a closer look at how the Event Loop manages both synchronous and asynchronous tasks. We’ll walk through how JavaScript handles operations, manages callbacks, and uses the Event Loop to ensure that asynchronous tasks don't block the execution of synchronous code.
+In this article, we’ll take a closer look at how the Event Loop manages both **synchronous** and **asynchronous** tasks. We’ll walk through how JavaScript handles operations, manages callbacks, and uses the Event Loop to ensure that asynchronous tasks don't block the execution of synchronous code.
 
-To help visualize this process, we provide a series of visualizations that illustrate each step of how JavaScript handles tasks. These visualizations are based on a specific code example, which is shown throughout the images to simplify the explanation. Each visualization is accompanied by a description to clarify what's happening at each step. This approach helps us see how tasks move through the Call Stack, the Event Queue, and how the Event Loop orchestrates everything.
+To help visualize this process, we provide a series of visualizations that illustrate each step of how JavaScript handles tasks. These visualizations are based on a specific code example, which is shown throughout the images to simplify the explanation. Each visualization is accompanied by a description to clarify what's happening at each step. This approach helps us see how tasks move through the **Call Stack**, the **Event Queue**, and how the **Event Loop** orchestrates everything.
 
 ## Step-by-Step Explanation of the JavaScript Event Loop Execution
 
@@ -26,81 +26,79 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](/event-loop-images/1.png)
 
-🚀 console.log('Start'); is executed immediately, producing "Start" as output.
+🚀 `console.log('Start');` is executed immediately, producing `"Start"` as output.
 
-⏸️ The Event Loop is paused while synchronous code runs in the main thread.
+⏸️ The _Event Loop_ is **paused** while synchronous code runs in the main thread.
 
 ![Alt text](/event-loop-images/2.png)
 
-⏳ The setTimeout(() => { zeroSecondsLater(); }, 0); function is asynchronous.
+⏳ The `setTimeout(() => { zeroSecondsLater(); }, 0);` function is **asynchronous**.
 
-🔄 The JavaScript engine delegates it to the Browser API.
+🔄 The JavaScript engine **delegates** it to the _Browser API_.
 
 ![Alt text](/event-loop-images/3.png)
 
-📩 Since the delay is 0ms, the Browser API processes the request immediately and moves the zeroSecondsLater callback to the event queue.
+📩 Since the delay is 0ms, the _Browser API_ processes the request immediately and moves the `zeroSecondsLater callback` to the _Event Queue_.
 
 ![Alt text](/event-loop-images/4.png)
 
-🔄 setTimeout(() => { console.log('3 seconds later'); }, 3000); is delegated to the Browser API, which starts a 3-second timer.
+🔄 `setTimeout(() => { console.log('3 seconds later'); }, 3000);` is **delegated** to the _Browser API_, which starts a 3-second timer.
 
 ![Alt text](/event-loop-images/6.png)
 
-⏳ Similarly, setTimeout(() => { console.log('4 seconds later'); }, 4000); is delegated to the Browser API, which starts a 4-second timer.
+⏳ Similarly, `setTimeout(() => { console.log('4 seconds later'); }, 4000);` is **delegated** to the _Browser API_, which starts a 4-second timer.
 
-⏩ Meanwhile, synchronous code continues executing in the main thread without waiting for these timers.
+⏩ Meanwhile, **synchronous code continues executing in the main thread without waiting for these timers**.
+
+🛑 Important: The **Call Stack executes only synchronous functions** and must complete all synchronous tasks before handling anything else. The _Event Loop_ does not move callbacks from the event queue to the call stack until all synchronous code has finished executing.
 
 ![Alt text](/event-loop-images/7.png)
 
-🚀 console.log('End'); is executed immediately, producing "End" as output.
+🚀 `console.log('End');` is executed immediately, producing `"End"` as output.
 
-⏩ The call stack executes only synchronous functions and must complete all synchronous tasks before handling anything else.
-
-👀 At this point, the call stack is empty, signaling the event loop to check the event queue.
+👀 At this point, the _Call Stack_ is empty, **signaling** the _Event Loop_ to check the event queue.
 
 ![Alt text](/event-loop-images/8.png)
 
-🎧 The event loop listens for an empty call stack and then moves the first processed callback from the event queue to the call stack for execution.
+🎧 The _Event Loop_ waits for the _Call Stack_ to become empty and then moves the **first** callback from the _Event Queue_ to the _Call Stack_ for execution.
 
-🔁 The zeroSecondsLater(); callback is moved from the event queue to the call stack.
+🔁 The `zeroSecondsLater();` callback is moved from the event queue to the call stack.
 
 ![Alt text](/event-loop-images/9.png)
 
-📩 The Browser API completes the 3-second timer and moves console.log('3 seconds later'); to the event queue.
+📩 The _Browser API_ completes the 3-second timer and moves `console.log('3 seconds later');` to the _Event Queue_.
 
 ![Alt text](/event-loop-images/10.png)
 
-📩 Similarly, after 4 seconds, the Browser API moves console.log('4 seconds later'); to the event queue, placing it after the "3 seconds later" callback.
-
-🛑 Important: The event loop does not move callbacks to the call stack until all synchronous code has finished executing.
+📩 Similarly, after 4 seconds, the _Browser API_ moves `console.log('4 seconds later');` to the _Event Queue_, placing it after the `console.log('3 seconds later');` callback.
 
 ![Alt text](/event-loop-images/11.png)
 
-🔄 The zeroSecondsLater(); callback invokes oneSecondLater();
+🔄 The `zeroSecondsLater();` callback invokes `oneSecondLater();`.
 
 ![Alt text](/event-loop-images/12.png)
 
-🔄 oneSecondLater(); invokes console.log.
+🔄 `oneSecondLater();` invokes `console.log`.
 
 ![Alt text](/event-loop-images/13.png)
 
-💬 "1 second later" is printed in the console.
+💬 `"1 second later"` is printed in the console.
 
 ![Alt text](/event-loop-images/14.png)
 
-🔄 Then, zeroSecondsLater(); invokes twoSecondsLater();.
+🔄 Then, `zeroSecondsLater();` invokes `twoSecondsLater();`.
 
 ![Alt text](/event-loop-images/15.png)
 
-🔄 twoSecondsLater(); invokes console.log.
+🔄 `twoSecondsLater();` invokes `console.log`.
 
 ![Alt text](/event-loop-images/16.png)
 
-💬 "2 seconds later" is printed in the console.
+💬 `"2 seconds later"` is printed in the console. All the synchronous code has been executed and the callback function `zeroSecondsLater()` completes its execution. At this point, the _Call Stack_ becomes empty, signaling the _Event Loop_ to begin processing callbacks from the _Event Queue_.
 
 ![Alt text](/event-loop-images/17.png)
 
-👀 The call stack is now empty, so the event loop moves console.log('3 seconds later'); from the event queue to the call stack.
+👀 The _Event Loop_ moves `console.log('3 seconds later');` from the _Event Queue_ to the _Call Stack_.
 
 ![Alt text](/event-loop-images/18.png)
 
