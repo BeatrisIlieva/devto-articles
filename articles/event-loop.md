@@ -44,7 +44,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ⏸️ The _Event Loop_ is **paused** while synchronous code runs in the main thread.
 
-![Image Alt Text](https://raw.githubusercontent.com/BeatrisIlieva/devto-articles/main/event-loop-images/.png)
+![Image Alt Text](https://raw.githubusercontent.com/BeatrisIlieva/devto-articles/main/event-loop-images/2.png)
 
 ⏳ The `setTimeout(() => { zeroSecondsLater(); }, 0);` function is **asynchronous**.
 
