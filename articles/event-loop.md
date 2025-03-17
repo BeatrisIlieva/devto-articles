@@ -8,7 +8,13 @@ published: true
 
 1. [Introduction](#introduction)
 2. [Step-by-Step Explanation of the JavaScript Event Loop Execution](#step-by-step-explanation-of-the-javascript-event-loop-execution)
-3. [Key Takeaways](#key-takeaways)
+3. [Data Structures: Call Stack and Event Queue](#data-structures-call-stack-and-event-queue)
+4. [Key Takeaways](#key-takeaways)
+
+🔗 **Live Demo**: https://beatrisilieva.github.io/event-loop
+
+🎥 **Demo Video**:
+[![Watch the video](https://img.youtube.com/vi/LX0Mky7DvFc/maxresdefault.jpg)](https://www.youtube.com/watch?v=LX0Mky7DvFc)
 
 ## Introduction
 
