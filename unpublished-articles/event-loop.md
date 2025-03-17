@@ -7,6 +7,8 @@ published: true
 ## 📋 Table of Contents
 
 1. [Introduction](#introduction)
+2. [Step-by-Step Explanation of the JavaScript Event Loop Execution](#step-by-step-explanation-of-the-javascript-event-loop-execution)
+3. [Key Takeaways](#key-takeaways)
 
 ## Introduction
 
@@ -114,7 +116,7 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](/event-loop-images/21.png)
 
-## Key Takeaways:
+## Key Takeaways
 
 ✅ Only synchronous code is executed in the call stack (Execution Stack) on the main thread. The event loop does not move callbacks from the event queue to the call stack until all synchronous code has finished executing.
 
