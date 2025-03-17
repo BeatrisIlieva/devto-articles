@@ -8,6 +8,16 @@ published: true
 
 1. [Introduction](#introduction)
 
+## Introduction
+
+JavaScript is a single-threaded language, meaning it can only execute one task at a time on the main thread. However, this doesn't mean JavaScript can't handle multiple tasks simultaneously. The key to understanding this behavior lies in the Event Loop.
+
+The Event Loop allows JavaScript to perform asynchronous operations, such as waiting for a network request or timer, without blocking the main thread. By offloading tasks to be executed later, JavaScript creates the illusion of parallel execution while still maintaining its single-threaded nature.
+
+In this article, we’ll take a closer look at how the Event Loop manages both synchronous and asynchronous tasks. We’ll walk through how JavaScript handles operations, manages callbacks, and uses the Event Loop to ensure that asynchronous tasks don't block the execution of synchronous code.
+
+To help visualize this process, we provide a series of visualizations that illustrate each step of how JavaScript handles tasks. These visualizations are based on a specific code example, which is shown throughout the images to simplify the explanation. Each visualization is accompanied by a description to clarify what's happening at each step. This approach helps us see how tasks move through the Call Stack, the Event Queue, and how the Event Loop orchestrates everything.
+
 ## Step-by-Step Explanation of the JavaScript Event Loop Execution
 
 For better visualization, all synchronous execution contexts are pushed onto the call stack, ready to be executed. The Execution Stack (Call Stack) is where synchronous code runs on the main thread.
@@ -103,3 +113,13 @@ For better visualization, all synchronous execution contexts are pushed onto the
 🚀 The function executes, producing "4 seconds later" in the console.
 
 ![Alt text](/event-loop-images/21.png)
+
+## Key Takeaways:
+
+✅ Only synchronous code is executed in the call stack (Execution Stack) on the main thread. The event loop does not move callbacks from the event queue to the call stack until all synchronous code has finished executing.
+
+✅ Asynchronous functions (e.g., setTimeout) are delegated to the Browser API, which processes them in parallel while synchronous code continues.
+
+✅ Callbacks enter the event queue based on when they were processed by the browser, not necessarily in the order they were requested.
+
+✅ The event loop waits for the call stack to be empty before moving a callback from the event queue to the call stack.
