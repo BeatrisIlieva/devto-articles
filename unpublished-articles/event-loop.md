@@ -34,8 +34,30 @@ For better visualization, all synchronous execution contexts are pushed onto the
 
 ![Alt text](/event-loop-images/6.png)
 
-⏳  Similarly, setTimeout(() => { console.log('4 seconds later'); }, 4000); is delegated to the Browser API, which starts a 4-second timer.
+⏳ Similarly, setTimeout(() => { console.log('4 seconds later'); }, 4000); is delegated to the Browser API, which starts a 4-second timer.
 
 ⏩ Meanwhile, synchronous code continues executing in the main thread without waiting for these timers.
 
 ![Alt text](/event-loop-images/7.png)
+
+🚀 console.log('End'); is executed immediately, producing "End" as output.
+
+⏩ The call stack executes only synchronous functions and must complete all synchronous tasks before handling anything else.
+
+👀 At this point, the call stack is empty, signaling the event loop to check the event queue.
+
+![Alt text](/event-loop-images/8.png)
+
+🎧 The event loop listens for an empty call stack and then moves the first processed callback from the event queue to the call stack for execution.
+
+🔁 The zeroSecondsLater(); callback is moved from the event queue to the call stack.
+
+![Alt text](/event-loop-images/9.png)
+
+📩 The Browser API completes the 3-second timer and moves console.log('3 seconds later'); to the event queue.
+
+![Alt text](/event-loop-images/10.png)
+
+📩 Similarly, after 4 seconds, the Browser API moves console.log('4 seconds later'); to the event queue, placing it after the "3 seconds later" callback.
+
+![Alt text](/event-loop-images/11.png)
