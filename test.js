@@ -1,10 +1,21 @@
-function sayHi(salutation, name) {
-    console.log(`Hi ${salutation} ${name}, my name is ${this.name}!`);
+const arr = [1, 2, 3, 4, 5];
+
+function notPure(input) {
+    let sum = 0;
+
+    input.forEach(element => {
+        if (element % 2 != 0) {
+            sum += element;
+        }
+    });
+
+    return sum;
 }
 
-const newContext = {
-    name: 'John'
-};
+console.log(notPure(arr)); // 9
 
-const modifiedSayHi = sayHi.bind(newContext);
-modifiedSayHi('dear', 'Michel'); // Hi dear Michel, my name is John!
+function pure(input) {
+    return input.reduce((acc, curr) => acc + curr);
+}
+
+console.log(pure(arr));

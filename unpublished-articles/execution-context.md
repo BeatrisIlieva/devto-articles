@@ -183,8 +183,7 @@ sayHi.call(newContext, 'dear', 'Michel'); // Hi dear Michel, my name is John!
 
 ##### Bind
 
-Bind returns us a modified function (with a context being set) that can be invoked later on.
-
+Bind returns us a modified function (with a context being set) that can be invoked later on. Using it we do not change the context of the existing function but create  a new one and postpone it execution for later on.
 ```javascript
 function sayHi(salutation, name) {
     console.log(`Hi ${salutation} ${name}, my name is ${this.name}!`);
@@ -209,7 +208,7 @@ The benefit of `bind()` is that we can pass it as a callback function.
     inputElement.addEventListener('click', sayHi.bind({name: 'John'}));
 
     function sayHi() {
-        console.log(`Hi, my names is ${this.name}!`);
+        console.log(`Hi, my names is ${this.name}!`); // Hi, my names is John!
     }
 </script>
 ```
