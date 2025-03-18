@@ -63,7 +63,7 @@ console.log(reducedResult); // 15
 
 A pure function in JavaScript is a function that when receiving one and the same input it always returns the same output. Pure functions do not have 'side effects' -> their result do not depend on conditions that would change the result.
 
-An example for not a pure function:
+An example for an inpure function is the following because it depends on outer dependency and it result is not predictable. 
 
 ```javascript
 const arr = [1, 2, 3, 4, 5];
@@ -71,26 +71,30 @@ const arr = [1, 2, 3, 4, 5];
 function notPure(input) {
     let sum = 0;
 
-    input.forEach(element => {
-        if (element % 2 != 0) {
-            sum += element;
+    input.forEach(number => {
+        const randomNum = Math.random();
+
+        if (randomNum > 0.5) {
+            sum += number;
         }
     });
 
     return sum;
 }
-
-console.log(notPure(arr)); // 9
 ```
 
-An example for a pure function:
+An example for a pure function is the following because when it receives the array `[1, 2, 3, 4, 5]` the result from it will always be `15`:
 
 ```javascript
 const arr = [1, 2, 3, 4, 5];
 
 function pure(input) {
-    return input.reduce((acc, curr) => acc + curr);
-}
+    let sum = 0;
 
-console.log(pure(arr)); // 15
+    input.forEach(number => {
+        sum += number;
+    });
+
+    return sum;
+}
 ```

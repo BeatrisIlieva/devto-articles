@@ -1,21 +1,26 @@
-const arr = [1, 2, 3, 4, 5];
+function outer() {
+    let number = 1;
 
-function notPure(input) {
-    let sum = 0;
-
-    input.forEach(element => {
-        if (element % 2 != 0) {
-            sum += element;
-        }
-    });
-
-    return sum;
+    return function inner() {
+        console.log(number++);
+    };
 }
 
-console.log(notPure(arr)); // 9
+const innerFunction = outer();
+innerFunction(); // 1
+innerFunction(); // 2
+innerFunction(); // 3
 
-function pure(input) {
-    return input.reduce((acc, curr) => acc + curr);
+function outer2() {
+    let number = 1;
+
+    function inner() {
+        console.log(number++);
+    }
+
+    inner();
 }
 
-console.log(pure(arr));
+outer2(); // 1
+outer2(); // 1
+outer2(); // 1
