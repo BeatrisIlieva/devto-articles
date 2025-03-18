@@ -12,11 +12,10 @@
     <script>
         const inputElement = document.querySelector('input');
         
-        inputElement.addEventListener('click', sayHi);
+        inputElement.addEventListener('click', sayHi.bind({name: 'John'}));
         
         function sayHi() {
-            console.log(`Hi, my names is ${this.name}!`); // Hi, my names is Button!
-            console.log(this); // <input type="button" value="Click" name="Button">
+            console.log(`Hi, my names is ${this.name}!`);
         }
     </script>
 </body>

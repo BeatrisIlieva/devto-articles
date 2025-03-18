@@ -91,21 +91,21 @@ Let's remember that for the context is important how th function is invoked. `th
 The context becomes the DOM element that the event is attached to. This happens because we delegate to the Browser to execute the function when exactly that element is clicked. The Browser attaches to the function callback the element as a context so as to be known from where the event is triggered.
 
 ```javascript
-    <input type="button" value="Click" name="Button">
+<input type="button" value="Click" name="Button">
 
-    <script>
-        const inputElement = document.querySelector('input');
+<script>
+    const inputElement = document.querySelector('input');
 
-        inputElement.addEventListener('click', sayHi);
+    inputElement.addEventListener('click', sayHi);
 
-        function sayHi() {
-            console.log(`Hi, my names is ${this.name}!`); // Hi, my names is Button!
-            console.log(this);
-        }
-    </script>
+    function sayHi() {
+        console.log(`Hi, my names is ${this.name}!`); // Hi, my names is Button!
+        console.log(this);
+    }
+</script>
 ```
 
-## Arrow function context
+#### Arrow function context
 
 Everything said so far was valid for function declarations and function expression. For arrow function is important where it is declared. It inherits the context of it's parent function. Upon creation it refers to the `this` of it parent function. Upon creation of an arrow function the context is passed from top to bottom.
 
@@ -137,4 +137,79 @@ const person = {
 };
 
 person.greet();
+```
+
+#### Explicit Binding
+
+Using call(), apply() and bind() we can explicitly define what the context of a function to be. They force a function to use a particular context when it is invoked.
+
+Both call() and apply() change the context ans execute the function. Bind only changes the context without invoking the function.
+
+Since everything in JS is an object, a function is also an object. As an object a function has its own properties. Some of them are namely call(), apply() and bind().
+
+##### Call
+
+`call()` require as a first argument the new context.
+
+```javascript
+function sayHi() {
+    console.log(`Hi, my name is ${this.name}!`);
+}
+
+const newContext = {
+    name: 'John'
+};
+
+sayHi.call(newContext); // Hi, my name is John!
+```
+
+Optionally can can pass as many additional arguments as we need.
+
+```javascript
+function sayHi(salutation, name) {
+    console.log(`Hi ${salutation} ${name}, my name is ${this.name}!`);
+}
+
+const newContext = {
+    name: 'John'
+};
+
+sayHi.call(newContext, 'dear', 'Michel'); // Hi dear Michel, my name is John!
+```
+
+##### Apply
+
+`apply()` require as a first argument the new context. As a second one we can pass an array for arguments. To remember the difference in the second parameter between call and apply, we can make an association using the first letter -> both apply and array starts with 'a'.
+
+##### Bind
+
+Bind returns us a modified function (with a context being set) that can be invoked later on.
+
+```javascript
+function sayHi(salutation, name) {
+    console.log(`Hi ${salutation} ${name}, my name is ${this.name}!`);
+}
+
+const newContext = {
+    name: 'John'
+};
+
+const modifiedSayHi = sayHi.bind(newContext);
+modifiedSayHi('dear', 'Michel'); // Hi dear Michel, my name is John!
+```
+
+The benefit of `bind()` is that we can pass it as a callback function.
+
+```javascript
+<input type="button" value="Click" name="Button">
+
+<script>
+    const inputElement = document.querySelector('input');
+
+    inputElement.addEventListener('click', sayHi.bind({name: 'John'}));
+
+    function sayHi() {
+        console.log(`Hi, my names is ${this.name}!`);
+    }
+</script>
 ```
